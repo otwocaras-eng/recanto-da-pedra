@@ -11,6 +11,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- Prevenção de FOUC e Detecção Imediata de Tema -->
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('recanto-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+  
   <!-- Folha de Estilos Autoral -->
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -31,9 +44,36 @@
         <a href="#experiencias" class="nav-link">Experiências</a>
         <a href="#informacoes" class="nav-link">Informações & Horários</a>
         <a href="#localizacao" class="nav-link">Como Chegar</a>
+        
+        <!-- Alternador no Menu Mobile -->
+        <div class="nav-theme-item">
+          <span class="nav-theme-label">Aparência</span>
+          <button class="theme-toggle-pill" id="navThemeToggle" type="button" aria-label="Alternar modo escuro e claro">
+            <span class="pill-text-light">☀️ Modo Claro</span>
+            <span class="pill-text-dark">🌙 Modo Escuro</span>
+          </button>
+        </div>
       </nav>
 
       <div class="header-actions">
+        <!-- Botão Elegante de Alternância de Tema -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Alternar tema claro e escuro" title="Alternar modo escuro / claro">
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
         <a href="#reservar" class="btn btn-gold btn-header-reserve js-open-modal">Reservar Estadia</a>
         <button class="mobile-toggle" aria-label="Abrir menu de navegação">☰</button>
       </div>
@@ -43,7 +83,9 @@
   <!-- ==================== HERO SECTION ==================== -->
   <section class="hero-section" id="inicio">
     <div class="hero-backdrop">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85" alt="Costão de pedras e mar azul cristalino em Iriri" class="hero-bg-img">
+      <div class="hero-parallax-wrap">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85" alt="Costão de pedras e mar azul cristalino em Iriri" class="hero-bg-img">
+      </div>
       <div class="hero-overlay"></div>
     </div>
 
@@ -185,7 +227,7 @@
   <!-- ==================== MANIFESTO / O REFÚGIO ==================== -->
   <section class="concept-section" id="o-refugio">
     <div class="container concept-grid">
-      <div class="concept-text-col">
+      <div class="concept-text-col" data-reveal="left">
         <span class="eyebrow eyebrow-left">O Conceito Autoral</span>
         <h2 class="section-title">Comer, descansar e contemplar o mar de Iriri.</h2>
         <p class="section-description">
@@ -195,18 +237,18 @@
           Arquitetura integrada ao relevo rochoso, deque em madeiras nobres sobre as pedras, jardins litorâneos e uma cozinha que honra as tradições da autêntica panela de barro de Goiabeiras com peixes e mariscos frescos da nossa própria costa.
         </p>
 
-        <div class="concept-pillars">
-          <div class="pillar-card">
+        <div class="concept-pillars" data-reveal-group>
+          <div class="pillar-card" data-reveal="up">
             <span class="pillar-number">01</span>
             <h3 class="pillar-title">Comer</h3>
             <p class="pillar-desc">Culinária capixaba raiz e contemporânea, com ingredientes frescos e vista para o oceano.</p>
           </div>
-          <div class="pillar-card">
+          <div class="pillar-card" data-reveal="up">
             <span class="pillar-number">02</span>
             <h3 class="pillar-title">Descansar</h3>
             <p class="pillar-desc">Suítes arejadas, roupas de cama em puro algodão e o murmúrio constante das ondas.</p>
           </div>
-          <div class="pillar-card">
+          <div class="pillar-card" data-reveal="up">
             <span class="pillar-number">03</span>
             <h3 class="pillar-title">Contemplar</h3>
             <p class="pillar-desc">O nascer do sol dourado no costão de pedra e o azul profundo da enseada de Iriri.</p>
@@ -214,7 +256,7 @@
         </div>
       </div>
 
-      <div class="concept-visual-col">
+      <div class="concept-visual-col" data-reveal="right">
         <div class="visual-composition">
           <div class="img-main-frame">
             <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" alt="Ambiente relaxante à beira-mar">
@@ -231,7 +273,7 @@
   <!-- ==================== ACOMODAÇÕES ==================== -->
   <section class="suites-section" id="acomodacoes">
     <div class="container">
-      <div class="section-header-center">
+      <div class="section-header-center" data-reveal="up">
         <span class="eyebrow">Acomodações de Charme</span>
         <h2 class="section-title">Refúgios voltados para o horizonte azul</h2>
         <p class="section-description">
@@ -239,9 +281,9 @@
         </p>
       </div>
 
-      <div class="suites-grid">
+      <div class="suites-grid" data-reveal-group>
         <!-- Suíte 1 -->
-        <article class="suite-card">
+        <article class="suite-card" data-reveal="up">
           <div class="suite-media">
             <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" alt="Suíte Costa Azul">
             <span class="suite-tag">Frente Mar</span>
@@ -276,7 +318,7 @@
         </article>
 
         <!-- Suíte 2 -->
-        <article class="suite-card">
+        <article class="suite-card" data-reveal="up">
           <div class="suite-media">
             <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="Suíte Mirante da Pedra">
             <span class="suite-tag">Vista Panorâmica</span>
@@ -311,7 +353,7 @@
         </article>
 
         <!-- Suíte 3 -->
-        <article class="suite-card">
+        <article class="suite-card" data-reveal="up">
           <div class="suite-media">
             <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80" alt="Bangalô das Enseadas">
             <span class="suite-tag">Máxima Exclusividade</span>
@@ -351,15 +393,15 @@
   <!-- ==================== GASTRONOMIA CAPIXABA ==================== -->
   <section class="gastronomy-section" id="gastronomia">
     <div class="container gastronomy-grid">
-      <div class="gastronomy-content">
+      <div class="gastronomy-content" data-reveal="left">
         <span class="eyebrow" style="color: var(--gold-glow);">Gastronomia & Tradição</span>
         <h2 class="section-title">Sabores que nascem do mar e da terra capixaba</h2>
         <p>
           "Moqueca é capixaba, o resto é peixada." Aqui no Recanto da Pedra, essa afirmação ganha vida em panelas de barro artesanais, azeite de urucum puro, coentro fresco e peixes nobres pescados diariamente em Iriri e Anchieta.
         </p>
 
-        <div class="dish-highlights">
-          <div class="dish-item">
+        <div class="dish-highlights" data-reveal-group>
+          <div class="dish-item" data-reveal="left">
             <div class="dish-icon">🍲</div>
             <div>
               <h3 class="dish-title">Moqueca Capixaba de Badejo & Camarão VG</h3>
@@ -367,7 +409,7 @@
             </div>
           </div>
 
-          <div class="dish-item">
+          <div class="dish-item" data-reveal="left">
             <div class="dish-icon">🦐</div>
             <div>
               <h3 class="dish-title">Torta Capixaba Tradicional & Mariscos</h3>
@@ -375,7 +417,7 @@
             </div>
           </div>
 
-          <div class="dish-item">
+          <div class="dish-item" data-reveal="left">
             <div class="dish-icon">🍸</div>
             <div>
               <h3 class="dish-title">Coquetelaria Autoral Costa Azul</h3>
@@ -387,16 +429,16 @@
         <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20reservar%20uma%20mesa%20no%20Restaurante%20do%20Recanto%20da%20Pedra" target="_blank" class="btn btn-gold">Reservar Mesa no Restaurante</a>
       </div>
 
-      <div class="gastronomy-gallery">
-        <div class="gastro-card tall">
+      <div class="gastronomy-gallery" data-reveal-group>
+        <div class="gastro-card tall" data-reveal="zoom">
           <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Moqueca Capixaba tradicional na panela de barro">
           <div class="gastro-caption">Autêntica Moqueca Capixaba</div>
         </div>
-        <div class="gastro-card">
+        <div class="gastro-card" data-reveal="right">
           <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Restaurante com vista panorâmica para o mar">
           <div class="gastro-caption">Salão com vista para as pedras</div>
         </div>
-        <div class="gastro-card">
+        <div class="gastro-card" data-reveal="right">
           <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="Drinks refrescantes à beira-mar">
           <div class="gastro-caption">Coquetéis ao entardecer</div>
         </div>
@@ -405,9 +447,10 @@
   </section>
 
   <!-- ==================== EXPERIÊNCIAS & IRIRI ==================== -->
+  <!-- ==================== EXPERIÊNCIAS & IRIRI ==================== -->
   <section class="experiences-section" id="experiencias">
     <div class="container">
-      <div class="section-header-center">
+      <div class="section-header-center" data-reveal="up">
         <span class="eyebrow">Momentos Únicos</span>
         <h2 class="section-title">O Encanto da Costa Azul</h2>
         <p class="section-description">
@@ -415,8 +458,8 @@
         </p>
       </div>
 
-      <div class="exp-grid">
-        <div class="exp-card">
+      <div class="exp-grid" data-reveal-group>
+        <div class="exp-card" data-reveal="up">
           <div class="exp-img-wrap">
             <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Piscinas naturais nas pedras de Iriri">
           </div>
@@ -426,7 +469,7 @@
           </div>
         </div>
 
-        <div class="exp-card">
+        <div class="exp-card" data-reveal="up">
           <div class="exp-img-wrap">
             <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Café da manhã artesanal ao ar livre">
           </div>
@@ -436,7 +479,7 @@
           </div>
         </div>
 
-        <div class="exp-card">
+        <div class="exp-card" data-reveal="up">
           <div class="exp-img-wrap">
             <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80" alt="Pôr do Sol no costão rochoso">
           </div>
@@ -446,7 +489,7 @@
           </div>
         </div>
 
-        <div class="exp-card">
+        <div class="exp-card" data-reveal="up">
           <div class="exp-img-wrap">
             <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Passeios náuticos pelas enseadas de Anchieta">
           </div>
@@ -462,13 +505,13 @@
   <!-- ==================== DEPOIMENTOS ==================== -->
   <section class="reviews-section">
     <div class="container">
-      <div class="section-header-center">
+      <div class="section-header-center" data-reveal="up">
         <span class="eyebrow">Memórias de Quem Viveu</span>
         <h2 class="section-title">Palavras de Nossos Hóspedes</h2>
       </div>
 
-      <div class="reviews-grid">
-        <div class="review-card">
+      <div class="reviews-grid" data-reveal-group>
+        <div class="review-card" data-reveal="up">
           <div class="review-stars">★★★★★</div>
           <p class="review-quote">
             "Acordar com o barulho do mar batendo nas pedras e tomar um café impecável olhando a Costa Azul não tem preço. A moqueca servida no restaurante é uma das melhores que comi em todo o Espírito Santo."
@@ -482,7 +525,7 @@
           </div>
         </div>
 
-        <div class="review-card">
+        <div class="review-card" data-reveal="up">
           <div class="review-stars">★★★★★</div>
           <p class="review-quote">
             "O cuidado com a estética e o silêncio são impressionantes. Uma hospedagem que respeita a natureza e oferece um conforto no nível das melhores pousadas de charme do Brasil."
@@ -496,7 +539,7 @@
           </div>
         </div>
 
-        <div class="review-card">
+        <div class="review-card" data-reveal="up">
           <div class="review-stars">★★★★★</div>
           <p class="review-quote">
             "Lugar perfeito para casais que buscam descansar de verdade. Tomar um vinho no deque sobre as rochas ao entardecer é uma experiência mágica."
@@ -516,7 +559,7 @@
   <!-- ==================== INFORMAÇÕES OFICIAIS & LOCALIZAÇÃO ==================== -->
   <section class="location-section" id="informacoes">
     <div class="container">
-      <div class="section-header-center" style="margin-bottom: 2.8rem;">
+      <div class="section-header-center" style="margin-bottom: 2.8rem;" data-reveal="up">
         <span class="eyebrow">Informações Oficiais</span>
         <h2 class="section-title">Localização, Horários & Atendimento</h2>
         <p class="section-description">
@@ -525,9 +568,9 @@
       </div>
 
       <!-- Grid com Horários, Contatos e Endereço -->
-      <div class="info-cards-container">
+      <div class="info-cards-container" data-reveal-group>
         <!-- Card 1: Horários de Funcionamento com Status Dinâmico -->
-        <div class="info-card">
+        <div class="info-card" data-reveal="up">
           <div>
             <div class="info-card-header">
               <div class="info-card-title-group">
@@ -576,7 +619,7 @@
         </div>
 
         <!-- Card 2: Contatos Separados (Telefone Comercial e WhatsApp) -->
-        <div class="info-card">
+        <div class="info-card" data-reveal="up">
           <div>
             <div class="info-card-header">
               <div class="info-card-title-group">
@@ -616,7 +659,7 @@
 
       <!-- Localização Geográfica e Mapa -->
       <div class="location-grid" id="localizacao">
-        <div class="location-text">
+        <div class="location-text" data-reveal="left">
           <span class="eyebrow eyebrow-left">📍 Localização Oficial</span>
           <h3 class="section-title" style="font-size: 1.85rem; margin-bottom: 1.2rem;">Onde Encontrar o Recanto</h3>
           
@@ -665,7 +708,7 @@
           <a href="https://www.google.com/maps/search/?api=1&query=Rua+Adir,+R.+Ady+Fernandes+Mignone,+Anchieta+-+ES,+29230-000" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Traçar Rota no Google Maps</a>
         </div>
 
-        <div class="map-wrapper">
+        <div class="map-wrapper" data-reveal="zoom">
           <iframe 
             title="Mapa de Localização - Recanto da Pedra em Anchieta ES"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14917.43265819777!2d-40.6480112!3d-20.8247926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb9dae076646549%3A0x6b4cf88ee27e5a6a!2sIriri%2C%20Anchieta%20-%20ES!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
@@ -682,7 +725,7 @@
 
   <!-- ==================== BANNER FINAL CTA ==================== -->
   <section class="cta-banner" id="reservar">
-    <div class="container cta-banner-content">
+    <div class="container cta-banner-content" data-reveal="zoom">
       <span class="hero-tag">Sua estadia memorável</span>
       <h2>Pronto para viver o ritmo do mar e da pedra?</h2>
       <p>

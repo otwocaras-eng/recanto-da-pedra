@@ -5,14 +5,206 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Header scroll effect
-  const header = document.querySelector('.site-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+  // Sinalizar inicialização do JS (garantia de fallback para manter conteúdo visível se o JS falhar)
+  document.documentElement.classList.add('js-ready');
+
+  // 0. Gerenciamento de Tema (Modo Escuro / Modo Claro)
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const navThemeToggle = document.getElementById('navThemeToggle');
+
+  const getPreferredTheme = () => {
+    const saved = localStorage.getItem('recanto-theme');
+    if (saved) return saved;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('recanto-theme', theme);
+
+    const isDark = theme === 'dark';
+    const label = isDark ? 'Mudar para Modo Claro' : 'Mudar para Modo Escuro';
+    const title = isDark ? 'Ativar Modo Claro' : 'Ativar Modo Escuro';
+
+    if (themeToggleBtn) {
+      themeToggleBtn.setAttribute('aria-label', label);
+      themeToggleBtn.setAttribute('title', title);
+      themeToggleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
     }
+    if (navThemeToggle) {
+      navThemeToggle.setAttribute('aria-label', label);
+      navThemeToggle.setAttribute('title', title);
+    }
+  };
+
+  // Sincronizar tema no carregamento
+  applyTheme(getPreferredTheme());
+
+  const handleThemeToggle = () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+  };
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', handleThemeToggle);
+  }
+  if (navThemeToggle) {
+    navThemeToggle.addEventListener('click', handleThemeToggle);
+  }
+
+  // Ouvir alterações de tema do sistema operacional se o usuário não salvou manualmente
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('recanto-theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
+
+  // 1. Header Translúcido (> 60px) e Parallax do Hero com requestAnimationFrame e Listener Passivo
+  const header = document.querySelector('.site-header');
+  const heroSection = document.querySelector('.hero-section');
+  const heroParallaxWrap = document.querySelector('.hero-parallax-wrap');
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let isHeroVisible = true;
+  let scrollTicking = false;
+
+  // Monitorar visibilidade do Hero para calcular parallax exclusivamente enquanto ele estiver visível na viewport
+  if (heroSection && 'IntersectionObserver' in window) {
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isHeroVisible = entry.isIntersecting;
+      });
+    }, { threshold: 0 });
+    heroObserver.observe(heroSection);
+  }
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    // Header translúcido ao rolar mais de 60px
+    if (header) {
+      if (currentScrollY > 60) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+
+    // Parallax suave no fundo do Hero: ~25% da velocidade do scroll
+    // Desativado em telas menores que 768px (mobile) e para quem ativou redução de movimento
+    if (heroParallaxWrap && isHeroVisible && !prefersReducedMotion && window.innerWidth > 768) {
+      const translateY = currentScrollY * 0.25;
+      heroParallaxWrap.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0)`;
+    }
+
+    scrollTicking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(handleScroll);
+      scrollTicking = true;
+    }
+  }, { passive: true });
+
+  // Executar no carregamento
+  handleScroll();
+
+  // Resetar transform se o usuário redimensionar para mobile
+  window.addEventListener('resize', () => {
+    if (heroParallaxWrap && window.innerWidth <= 768) {
+      heroParallaxWrap.style.transform = 'none';
+    }
+  }, { passive: true });
+
+  // 1.1 Scroll Reveal com IntersectionObserver (threshold ~0.15) e Cascata em Grupos (+0.1s)
+  if ('IntersectionObserver' in window && !prefersReducedMotion) {
+    // Configurar delays em cascata nos grupos (cards de suítes, gastronomia, experiências, etc.)
+    document.querySelectorAll('[data-reveal-group]').forEach(group => {
+      const groupItems = group.querySelectorAll('[data-reveal]');
+      groupItems.forEach((item, index) => {
+        if (!item.hasAttribute('data-reveal-delay')) {
+          item.setAttribute('data-reveal-delay', (index * 0.1).toFixed(2));
+        }
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const delay = target.getAttribute('data-reveal-delay');
+          if (delay) {
+            target.style.transitionDelay = `${delay}s`;
+          }
+          target.classList.add('is-revealed');
+          observer.unobserve(target); // Anima apenas uma vez
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      revealObserver.observe(el);
+    });
+  } else {
+    // Fallback: se não houver IntersectionObserver ou houver preferência por menos movimento, exibe tudo
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-revealed'));
+  }
+
+  // 1.2 Destaque do Link Ativo no Menu Superior conforme a Seção Visível
+  const navAnchorLinks = document.querySelectorAll('.main-nav .nav-link');
+  const sectionTargetIds = ['o-refugio', 'acomodacoes', 'gastronomia', 'experiencias', 'informacoes', 'localizacao'];
+  const trackedTargetSections = sectionTargetIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window && trackedTargetSections.length > 0) {
+    const navScrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const currentId = entry.target.getAttribute('id');
+          navAnchorLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === `#${currentId}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, {
+      rootMargin: '-30% 0px -55% 0px',
+      threshold: 0
+    });
+
+    trackedTargetSections.forEach(sec => navScrollObserver.observe(sec));
+  }
+
+  // 1.3 Rolagem Suave com Compensação do Cabeçalho Fixo ao Clicar em Âncoras
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        const headerEl = document.querySelector('.site-header');
+        const headerOffset = headerEl ? headerEl.offsetHeight : 80;
+        const targetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: targetTop,
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      }
+    });
   });
 
   // 2. Mobile Menu Toggle
