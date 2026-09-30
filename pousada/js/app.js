@@ -62,8 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 1. Header Translúcido (> 60px) e Parallax do Hero com requestAnimationFrame e Listener Passivo
+  // 1. Header Translúcido (> 60px), Barra de Progresso e Parallax do Hero com rAF
   const header = document.querySelector('.site-header');
+  const readingProgressBar = document.getElementById('readingProgressBar');
   const heroSection = document.querySelector('.hero-section');
   const heroParallaxWrap = document.querySelector('.hero-parallax-wrap');
   const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -93,10 +94,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Parallax suave no fundo do Hero: ~25% da velocidade do scroll
+    // 10. Barra de Progresso de Leitura Fixa no Topo (scaleX de 0 a 1)
+    if (readingProgressBar && !prefersReducedMotion) {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollableHeight > 0 ? Math.min(Math.max(currentScrollY / scrollableHeight, 0), 1) : 0;
+      readingProgressBar.style.transform = `scaleX(${progress})`;
+    }
+
+    // Parallax suave no fundo do Hero: controlado pela variável CSS --hero-parallax-speed (padrão: 40% do scroll)
     // Desativado em telas menores que 768px (mobile) e para quem ativou redução de movimento
     if (heroParallaxWrap && isHeroVisible && !prefersReducedMotion && window.innerWidth > 768) {
-      const translateY = currentScrollY * 0.25;
+      const rawSpeed = getComputedStyle(document.documentElement).getPropertyValue('--hero-parallax-speed').trim();
+      const parallaxSpeed = parseFloat(rawSpeed) || 0.40;
+      const translateY = currentScrollY * parallaxSpeed;
       heroParallaxWrap.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0)`;
     }
 
@@ -206,6 +216,79 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // 1.4 Efeito Magnético em Botões e Inclinação 3D (Tilt) em Cards
+  // Ativado exclusivamente em dispositivos com capacidade real de hover (cursor fino/mouse)
+  const isHoverCapable = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (isHoverCapable && !prefersReducedMotion) {
+    // Efeito Magnético: botões seguem sutilmente a posição do cursor sem interferir na transição CSS
+    const magneticButtons = document.querySelectorAll('.btn, .btn-luxury-quote');
+
+    magneticButtons.forEach(btn => {
+      let btnRaf = null;
+
+      btn.addEventListener('mousemove', (e) => {
+        if (btnRaf) return;
+        btnRaf = requestAnimationFrame(() => {
+          const rect = btn.getBoundingClientRect();
+          // Deslocamento suave de até ~4-5px em direção ao cursor
+          const offsetX = (e.clientX - rect.left - rect.width / 2) * 0.22;
+          const offsetY = (e.clientY - rect.top - rect.height / 2) * 0.22;
+
+          btn.style.setProperty('--mag-x', `${offsetX.toFixed(2)}px`);
+          btn.style.setProperty('--mag-y', `${offsetY.toFixed(2)}px`);
+          btnRaf = null;
+        });
+      }, { passive: true });
+
+      btn.addEventListener('mouseleave', () => {
+        if (btnRaf) {
+          cancelAnimationFrame(btnRaf);
+          btnRaf = null;
+        }
+        btn.style.setProperty('--mag-x', '0px');
+        btn.style.setProperty('--mag-y', '0px');
+      }, { passive: true });
+    });
+
+    // Inclinação 3D Suave (Tilt): cards acompanham o mouse com perspectiva de 900px e máx. 8 graus
+    // Controlada dinamicamente pela variável CSS --card-tilt-max (padrão: 8deg)
+    const tiltCards = document.querySelectorAll('.suite-card, .gastro-card, .exp-card');
+
+    tiltCards.forEach(card => {
+      let cardRaf = null;
+
+      card.addEventListener('mousemove', (e) => {
+        if (cardRaf) return;
+        cardRaf = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          // Posição percentual relativa ao centro (-0.5 a +0.5)
+          const pctX = ((e.clientX - rect.left) / rect.width) - 0.5;
+          const pctY = ((e.clientY - rect.top) / rect.height) - 0.5;
+
+          // Rotação máxima lida dinamicamente da variável CSS --card-tilt-max (padrão: 8deg)
+          const rawTilt = getComputedStyle(document.documentElement).getPropertyValue('--card-tilt-max').trim();
+          const maxTiltDeg = parseFloat(rawTilt) || 8;
+          const rotX = (-pctY * (maxTiltDeg * 2)).toFixed(2);
+          const rotY = (pctX * (maxTiltDeg * 2)).toFixed(2);
+
+          card.style.setProperty('--tilt-rx', `${rotX}deg`);
+          card.style.setProperty('--tilt-ry', `${rotY}deg`);
+          cardRaf = null;
+        });
+      }, { passive: true });
+
+      card.addEventListener('mouseleave', () => {
+        if (cardRaf) {
+          cancelAnimationFrame(cardRaf);
+          cardRaf = null;
+        }
+        card.style.setProperty('--tilt-rx', '0deg');
+        card.style.setProperty('--tilt-ry', '0deg');
+      }, { passive: true });
+    });
+  }
 
   // 2. Mobile Menu Toggle
   const mobileToggle = document.querySelector('.mobile-toggle');
@@ -561,6 +644,56 @@ Gostaria de verificar a disponibilidade e confirmar os valores para o período.`
       }
     });
   };
+
+  // 11. CONTADOR ANIMADO OPCIONAL: elementos com data-contador contam de 0 até o valor definido (IntersectionObserver), uma única vez
+  const contadorElements = document.querySelectorAll('[data-contador]');
+  if (contadorElements.length > 0 && 'IntersectionObserver' in window) {
+    const contadorObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          observer.unobserve(el);
+
+          const targetValue = parseFloat(el.getAttribute('data-contador'));
+          if (isNaN(targetValue)) return;
+
+          // Se o usuário prefere redução de movimento, o valor final já está visível
+          if (prefersReducedMotion) {
+            el.textContent = targetValue;
+            return;
+          }
+
+          const duration = 1600; // Duração suave de contagem
+          const startTime = performance.now();
+          const isFloat = el.getAttribute('data-contador').includes('.');
+
+          const animateCounter = (now) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Easing cúbico desacelerado no final
+            const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+            const current = targetValue * easeOutProgress;
+
+            el.textContent = isFloat ? current.toFixed(1) : Math.round(current);
+
+            if (progress < 1) {
+              requestAnimationFrame(animateCounter);
+            } else {
+              el.textContent = isFloat ? targetValue.toFixed(1) : targetValue;
+            }
+          };
+
+          // Inicia contagem do zero
+          el.textContent = '0';
+          requestAnimationFrame(animateCounter);
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    contadorElements.forEach(el => contadorObserver.observe(el));
+  }
 
   // Inicializar e atualizar a cada 60 segundos
   updateBusinessStatus();
