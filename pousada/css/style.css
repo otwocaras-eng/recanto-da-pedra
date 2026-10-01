@@ -62,6 +62,13 @@
   --font-display: 'Cinzel', 'Marcellus', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
+  /* Dimensões Padronizadas de Ícones Font Awesome */
+  --icon-xs: 0.75rem;
+  --icon-sm: 0.9rem;
+  --icon-md: 1.15rem;
+  --icon-lg: 1.45rem;
+  --icon-xl: 1.85rem;
+
   /* Elevações e Sombras */
   --shadow-sm: 0 2px 8px rgba(7, 19, 33, 0.05);
   --shadow-md: 0 10px 30px rgba(7, 19, 33, 0.08);
@@ -2695,7 +2702,8 @@ h1, h2, h3, h4, .serif-title {
 }
 
 /* Estado final revelado */
-.js-ready [data-reveal].is-revealed {
+.js-ready [data-reveal].is-revealed,
+.js-ready [data-reveal].is-visible {
   opacity: 1;
   transform: none;
 }
@@ -2716,65 +2724,468 @@ div[id="localizacao"],
 
 /* ==========================================================================
    ACESSIBILIDADE: PREFERS-REDUCED-MOTION
-   Desativa animações e movimentos mantendo todo o conteúdo visível
+   Desativa animações e movimentos mantendo todo o conteúdo visível.
+   O seletor :root:not([data-force-motion="true"]) permite suspender
+   temporariamente a redução durante testes e diagnósticos controlados.
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  :root:not([data-force-motion="true"]) *,
+  :root:not([data-force-motion="true"]) *::before,
+  :root:not([data-force-motion="true"]) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 
-  .btn,
-  .btn-luxury-quote {
+  :root:not([data-force-motion="true"]) .btn,
+  :root:not([data-force-motion="true"]) .btn-luxury-quote {
     --mag-x: 0px !important;
     --mag-y: 0px !important;
     transform: none !important;
   }
 
-  .btn::before,
-  .btn-luxury-quote::before {
+  :root:not([data-force-motion="true"]) .btn::before,
+  :root:not([data-force-motion="true"]) .btn-luxury-quote::before {
     display: none !important;
   }
 
-  .suite-card,
-  .gastro-card,
-  .exp-card {
+  :root:not([data-force-motion="true"]) .suite-card,
+  :root:not([data-force-motion="true"]) .gastro-card,
+  :root:not([data-force-motion="true"]) .exp-card {
     --tilt-rx: 0deg !important;
     --tilt-ry: 0deg !important;
     transform: none !important;
   }
 
-  .suite-media img,
-  .gastro-card img,
-  .exp-img-wrap img {
+  :root:not([data-force-motion="true"]) .suite-media img,
+  :root:not([data-force-motion="true"]) .gastro-card img,
+  :root:not([data-force-motion="true"]) .exp-img-wrap img {
     transform: none !important;
     transition: none !important;
   }
 
-  .reading-progress-bar {
+  :root:not([data-force-motion="true"]) .reading-progress-bar {
     display: none !important;
   }
 
-  .floating-whatsapp {
+  :root:not([data-force-motion="true"]) .floating-whatsapp {
     animation: none !important;
     transform: none !important;
     transition: none !important;
   }
 
-  .hero-tag,
-  .hero-title,
-  .hero-manifesto,
-  .hero-ctas,
-  .booking-console-wrapper,
-  .hero-bg-img,
-  .hero-parallax-wrap,
-  .hero-title em::after,
-  .js-ready [data-reveal] {
+  :root:not([data-force-motion="true"]) .hero-tag,
+  :root:not([data-force-motion="true"]) .hero-title,
+  :root:not([data-force-motion="true"]) .hero-manifesto,
+  :root:not([data-force-motion="true"]) .hero-ctas,
+  :root:not([data-force-motion="true"]) .booking-console-wrapper,
+  :root:not([data-force-motion="true"]) .hero-bg-img,
+  :root:not([data-force-motion="true"]) .hero-parallax-wrap,
+  :root:not([data-force-motion="true"]) .hero-title em::after,
+  :root:not([data-force-motion="true"]) .js-ready [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   INTERNACIONALIZAÇÃO (i18n) — SELETORES E RESILIÊNCIA DE LAYOUT
+   ========================================================================== */
+
+/* Seletor de Idioma no Header Desktop */
+.lang-selector {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  padding: 2px 3px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  gap: 2px;
+  transition: all var(--transition-smooth);
+}
+
+.lang-selector:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(232, 198, 140, 0.4);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-sans);
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 5px 8px;
+  border-radius: 9999px;
+  cursor: pointer;
+  line-height: 1;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+}
+
+.lang-btn:hover {
+  color: var(--gold-glow);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.lang-btn.active {
+  background: var(--gold-sand);
+  color: #0b1f38;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(197, 159, 96, 0.45);
+}
+
+.lang-btn:focus-visible {
+  outline: 2px solid var(--gold-glow);
+  outline-offset: 2px;
+}
+
+/* Modo escuro para o seletor desktop */
+[data-theme="dark"] .lang-selector {
+  background: rgba(11, 31, 56, 0.65);
+  border-color: rgba(232, 198, 140, 0.25);
+}
+
+[data-theme="dark"] .lang-btn.active {
+  background: var(--gold-glow);
+  color: #071321;
+  box-shadow: 0 2px 10px rgba(232, 198, 140, 0.5);
+}
+
+/* Seletor de Idioma no Menu Mobile (Gaveta) */
+.nav-lang-item {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 1.25rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nav-lang-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mobile-lang-selector {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 3px 4px;
+  gap: 3px;
+}
+
+.mobile-lang-selector .lang-btn {
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  min-width: 42px;
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  .nav-lang-item {
+    display: flex;
+  }
+}
+
+/* Ajustes de resiliência tipográfica para EN e ES */
+.main-nav {
+  gap: clamp(1rem, 1.6vw, 2.2rem);
+}
+
+.nav-link {
+  white-space: nowrap;
+}
+
+.booking-console-topbar {
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.console-nights-counter {
+  white-space: nowrap;
+}
+
+.luxury-booking-cell {
+  min-width: 0;
+}
+
+.btn-luxury-quote {
+  white-space: normal;
+  text-align: center;
+}
+
+.btn-quote-main {
+  justify-content: center;
+}
+
+.dish-highlights .dish-title {
+  word-break: break-word;
+}
+
+/* Utilitário de Acessibilidade: ocultação visual com preservação para leitores de tela */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ==========================================================================
+   FONT AWESOME 6 FREE — ESTILIZAÇÃO, CORES E MICROINTERAÇÕES PREMIUM
+   ========================================================================== */
+
+/* Ícones do Botão de Tema */
+.theme-toggle-btn i.theme-icon-sun,
+.theme-toggle-btn i.theme-icon-moon {
+  font-size: var(--icon-md);
+  line-height: 1;
+}
+
+/* Microinteração em Botões com Ícone de Seta */
+.btn-arrow {
+  display: inline-block;
+  font-size: var(--icon-xs);
+  margin-left: 6px;
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover .btn-arrow,
+.btn-luxury-quote:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover .btn-arrow,
+  .btn-luxury-quote:hover .btn-arrow {
+    transform: none !important;
+  }
+}
+
+/* Ícones do Console de Reserva */
+.luxury-booking-cell .cell-label i.cell-icon {
+  font-size: var(--icon-xs);
+  color: var(--gold-sand);
+  margin-right: 4px;
+}
+
+.feature-check-icon {
+  font-size: var(--icon-xs);
+  color: #10B981;
+  margin-right: 4px;
+}
+
+.nights-icon {
+  font-size: var(--icon-sm);
+  color: var(--gold-glow);
+  margin-right: 4px;
+}
+
+/* Ícone Container em Círculo Premium (Glassmorphism Suave) */
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(197, 159, 96, 0.12);
+  border: 1px solid rgba(197, 159, 96, 0.28);
+  color: var(--gold-glow);
+  font-size: var(--icon-md);
+  transition: all var(--transition-smooth);
+  flex-shrink: 0;
+}
+
+.dish-item:hover .icon-circle,
+.pillar-card:hover .icon-circle {
+  background: rgba(197, 159, 96, 0.24);
+  border-color: var(--gold-glow);
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 6px 18px rgba(197, 159, 96, 0.25);
+}
+
+/* Especificações das Suítes */
+.suite-specs .spec-item i {
+  font-size: var(--icon-sm);
+  color: var(--gold-sand);
+  margin-right: 5px;
+}
+
+/* Badges sobrepostas nas Imagens de Experiências */
+.exp-img-wrap {
+  position: relative;
+}
+
+.exp-badge-icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(11, 31, 56, 0.78);
+  border: 1px solid rgba(232, 198, 140, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-glow);
+  font-size: var(--icon-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform var(--transition-fast);
+  z-index: 2;
+}
+
+.exp-card:hover .exp-badge-icon {
+  transform: scale(1.12) rotate(6deg);
+  background: rgba(11, 31, 56, 0.92);
+  border-color: var(--gold-glow);
+}
+
+/* Ícones de Contato e Horários */
+.info-card .info-fa-icon {
+  color: var(--gold-glow);
+  font-size: var(--icon-md);
+}
+
+.contact-info-col .contact-fa-icon {
+  font-size: var(--icon-sm);
+  color: var(--gold-sand);
+  margin-right: 6px;
+}
+
+.route-badge i {
+  font-size: var(--icon-xs);
+  margin-right: 4px;
+}
+
+/* Estrelas de Avaliação */
+.review-stars {
+  color: #f59e0b;
+  font-size: var(--icon-sm);
+  letter-spacing: 2px;
+}
+
+/* Redes Sociais no Rodapé */
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--icon-sm);
+  transition: all var(--transition-fast);
+}
+
+.footer-social-link:hover {
+  background: var(--gold-sand);
+  border-color: var(--gold-glow);
+  color: #0b1f38;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(197, 159, 96, 0.35);
+}
+
+.footer-social-link:focus-visible {
+  outline: 2px solid var(--gold-glow);
+  outline-offset: 2px;
+}
+
+/* Botão Voltar ao Topo (Discreto e Elegante) */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 88px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ocean-deep);
+  border: 1px solid rgba(232, 198, 140, 0.4);
+  color: var(--gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--icon-sm);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--transition-smooth);
+  box-shadow: 0 8px 24px rgba(7, 19, 33, 0.3);
+  z-index: 998;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--gold-sand);
+  color: #0b1f38;
+  border-color: var(--gold-glow);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(197, 159, 96, 0.45);
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--gold-glow);
+  outline-offset: 3px;
+}
+
+/* Botão Hamburguer Mobile com Transição Suave */
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.35rem;
+  cursor: pointer;
+  padding: 6px;
+  line-height: 1;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.mobile-toggle:hover {
+  color: var(--gold-glow);
+}
+
+@media (max-width: 991px) {
+  .mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+

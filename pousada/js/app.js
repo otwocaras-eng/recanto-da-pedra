@@ -1,7 +1,7 @@
 /**
  * RECANTO DA PEDRA — POUSADA & GASTRONOMIA
  * Iriri, Costa Azul — Espírito Santo
- * Interações, Console de Reserva de Luxo e Navegação Fluida
+ * Interações, Console de Reserva de Luxo, Navegação Fluida e Suporte a i18n
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,8 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('recanto-theme', theme);
 
     const isDark = theme === 'dark';
-    const label = isDark ? 'Mudar para Modo Claro' : 'Mudar para Modo Escuro';
-    const title = isDark ? 'Ativar Modo Claro' : 'Ativar Modo Escuro';
+    const i18n = window.RecantoI18n;
+    const label = isDark 
+      ? (i18n ? i18n.t('nav.lightMode') : 'Mudar para Modo Claro')
+      : (i18n ? i18n.t('nav.darkMode') : 'Mudar para Modo Escuro');
+    const title = isDark 
+      ? (i18n ? i18n.t('nav.lightMode') : 'Ativar Modo Claro')
+      : (i18n ? i18n.t('nav.darkMode') : 'Ativar Modo Escuro');
 
     if (themeToggleBtn) {
       themeToggleBtn.setAttribute('aria-label', label);
@@ -67,7 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const readingProgressBar = document.getElementById('readingProgressBar');
   const heroSection = document.querySelector('.hero-section');
   const heroParallaxWrap = document.querySelector('.hero-parallax-wrap');
-  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+  const isReducedMotionForcedOff = document.documentElement.getAttribute('data-force-motion') === 'true' ||
+                                  (window.location && window.location.search.includes('motion=1')) ||
+                                  window.FORCE_ANIMATIONS === true;
+  if (isReducedMotionForcedOff) {
+    document.documentElement.setAttribute('data-force-motion', 'true');
+  }
+  const prefersReducedMotion = !isReducedMotionForcedOff && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let isHeroVisible = true;
   let scrollTicking = false;
@@ -94,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // 10. Barra de Progresso de Leitura Fixa no Topo (scaleX de 0 a 1)
+    // Barra de Progresso de Leitura Fixa no Topo (scaleX de 0 a 1)
     if (readingProgressBar && !prefersReducedMotion) {
       const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollableHeight > 0 ? Math.min(Math.max(currentScrollY / scrollableHeight, 0), 1) : 0;
@@ -102,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Parallax suave no fundo do Hero: controlado pela variável CSS --hero-parallax-speed (padrão: 40% do scroll)
-    // Desativado em telas menores que 768px (mobile) e para quem ativou redução de movimento
     if (heroParallaxWrap && isHeroVisible && !prefersReducedMotion && window.innerWidth > 768) {
       const rawSpeed = getComputedStyle(document.documentElement).getPropertyValue('--hero-parallax-speed').trim();
       const parallaxSpeed = parseFloat(rawSpeed) || 0.40;
@@ -130,9 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
-  // 1.1 Scroll Reveal com IntersectionObserver (threshold ~0.15) e Cascata em Grupos (+0.1s)
+  // 1.1 Scroll Reveal com IntersectionObserver (threshold ~0.10) e Cascata em Grupos (+0.1s)
   if ('IntersectionObserver' in window && !prefersReducedMotion) {
-    // Configurar delays em cascata nos grupos (cards de suítes, gastronomia, experiências, etc.)
     document.querySelectorAll('[data-reveal-group]').forEach(group => {
       const groupItems = group.querySelectorAll('[data-reveal]');
       groupItems.forEach((item, index) => {
@@ -150,21 +160,20 @@ document.addEventListener('DOMContentLoaded', () => {
           if (delay) {
             target.style.transitionDelay = `${delay}s`;
           }
-          target.classList.add('is-revealed');
-          observer.unobserve(target); // Anima apenas uma vez
+          target.classList.add('is-revealed', 'is-visible');
+          observer.unobserve(target);
         }
       });
     }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.10,
+      rootMargin: '0px 0px -25px 0px'
     });
 
     document.querySelectorAll('[data-reveal]').forEach(el => {
       revealObserver.observe(el);
     });
   } else {
-    // Fallback: se não houver IntersectionObserver ou houver preferência por menos movimento, exibe tudo
-    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-revealed'));
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-revealed', 'is-visible'));
   }
 
   // 1.2 Destaque do Link Ativo no Menu Superior conforme a Seção Visível
@@ -218,11 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 1.4 Efeito Magnético em Botões e Inclinação 3D (Tilt) em Cards
-  // Ativado exclusivamente em dispositivos com capacidade real de hover (cursor fino/mouse)
   const isHoverCapable = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   if (isHoverCapable && !prefersReducedMotion) {
-    // Efeito Magnético: botões seguem sutilmente a posição do cursor sem interferir na transição CSS
     const magneticButtons = document.querySelectorAll('.btn, .btn-luxury-quote');
 
     magneticButtons.forEach(btn => {
@@ -232,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnRaf) return;
         btnRaf = requestAnimationFrame(() => {
           const rect = btn.getBoundingClientRect();
-          // Deslocamento suave de até ~4-5px em direção ao cursor
           const offsetX = (e.clientX - rect.left - rect.width / 2) * 0.22;
           const offsetY = (e.clientY - rect.top - rect.height / 2) * 0.22;
 
@@ -252,8 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { passive: true });
     });
 
-    // Inclinação 3D Suave (Tilt): cards acompanham o mouse com perspectiva de 900px e máx. 8 graus
-    // Controlada dinamicamente pela variável CSS --card-tilt-max (padrão: 8deg)
     const tiltCards = document.querySelectorAll('.suite-card, .gastro-card, .exp-card');
 
     tiltCards.forEach(card => {
@@ -263,11 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cardRaf) return;
         cardRaf = requestAnimationFrame(() => {
           const rect = card.getBoundingClientRect();
-          // Posição percentual relativa ao centro (-0.5 a +0.5)
           const pctX = ((e.clientX - rect.left) / rect.width) - 0.5;
           const pctY = ((e.clientY - rect.top) / rect.height) - 0.5;
 
-          // Rotação máxima lida dinamicamente da variável CSS --card-tilt-max (padrão: 8deg)
           const rawTilt = getComputedStyle(document.documentElement).getPropertyValue('--card-tilt-max').trim();
           const maxTiltDeg = parseFloat(rawTilt) || 8;
           const rotX = (-pctY * (maxTiltDeg * 2)).toFixed(2);
@@ -282,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
       card.addEventListener('mouseleave', () => {
         if (cardRaf) {
           cancelAnimationFrame(cardRaf);
-          cardRaf = null;
+          btnRaf = null;
         }
         card.style.setProperty('--tilt-rx', '0deg');
         card.style.setProperty('--tilt-ry', '0deg');
@@ -290,30 +292,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Mobile Menu Toggle
+  // 2. Mobile Menu Toggle com Font Awesome
   const mobileToggle = document.querySelector('.mobile-toggle');
   const mainNav = document.querySelector('.main-nav');
 
   if (mobileToggle && mainNav) {
+    const updateToggleIcon = (isExpanded) => {
+      mobileToggle.innerHTML = isExpanded 
+        ? '<i class="fa-solid fa-xmark" aria-hidden="true"></i>' 
+        : '<i class="fa-solid fa-bars" aria-hidden="true"></i>';
+      mobileToggle.setAttribute('aria-expanded', isExpanded);
+    };
+
     mobileToggle.addEventListener('click', () => {
       mainNav.classList.toggle('active');
       const isExpanded = mainNav.classList.contains('active');
-      mobileToggle.setAttribute('aria-expanded', isExpanded);
-      mobileToggle.innerHTML = isExpanded ? '✕' : '☰';
+      updateToggleIcon(isExpanded);
     });
 
     mainNav.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         mainNav.classList.remove('active');
-        if (mobileToggle) mobileToggle.innerHTML = '☰';
+        updateToggleIcon(false);
       });
     });
   }
 
-  // 3. Formatação Inteligente de Datas e Console de Reservas
-  const monthsPt = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
-  const weekdaysPt = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-
+  // 3. Formatação Inteligente de Datas e Console de Reservas com Localização (i18n)
   const parseLocalDate = (dateStr) => {
     if (!dateStr) return new Date();
     const parts = dateStr.split('-');
@@ -368,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     barCheckout.value = checkoutStr;
   }
 
-  // Atualizar displays visuais do Console
+  // Atualizar displays visuais do Console usando Intl.DateTimeFormat através do i18n
   const updateConsoleDisplays = () => {
     if (!barCheckin || !barCheckout) return;
 
@@ -383,27 +388,67 @@ document.addEventListener('DOMContentLoaded', () => {
       return updateConsoleDisplays();
     }
 
+    const i18n = window.RecantoI18n;
+
     // Atualizar Check-in Visual
     if (checkinDayDisplay) checkinDayDisplay.textContent = String(inDate.getDate()).padStart(2, '0');
-    if (checkinMonthDisplay) checkinMonthDisplay.textContent = monthsPt[inDate.getMonth()];
-    if (checkinWeekdayDisplay) checkinWeekdayDisplay.textContent = weekdaysPt[inDate.getDay()];
+    if (checkinMonthDisplay) {
+      checkinMonthDisplay.textContent = i18n ? i18n.formatMonthShort(inDate) : inDate.toLocaleDateString('pt-BR', { month: 'short' }).toUpperCase();
+    }
+    if (checkinWeekdayDisplay) {
+      checkinWeekdayDisplay.textContent = i18n ? i18n.formatWeekday(inDate) : inDate.toLocaleDateString('pt-BR', { weekday: 'long' });
+    }
 
     // Atualizar Check-out Visual
     if (checkoutDayDisplay) checkoutDayDisplay.textContent = String(outDate.getDate()).padStart(2, '0');
-    if (checkoutMonthDisplay) checkoutMonthDisplay.textContent = monthsPt[outDate.getMonth()];
-    if (checkoutWeekdayDisplay) checkoutWeekdayDisplay.textContent = weekdaysPt[outDate.getDay()];
+    if (checkoutMonthDisplay) {
+      checkoutMonthDisplay.textContent = i18n ? i18n.formatMonthShort(outDate) : outDate.toLocaleDateString('pt-BR', { month: 'short' }).toUpperCase();
+    }
+    if (checkoutWeekdayDisplay) {
+      checkoutWeekdayDisplay.textContent = i18n ? i18n.formatWeekday(outDate) : outDate.toLocaleDateString('pt-BR', { weekday: 'long' });
+    }
 
     // Calcular Noites
     const diffTime = Math.abs(outDate - inDate);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    const nightWord = diffDays === 1 ? '1 Noite' : `${diffDays} Noites`;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
+
+    const nightWordCap = diffDays === 1 
+      ? (i18n ? i18n.t('booking.nightSingleCap') : 'Noite') 
+      : (i18n ? i18n.t('booking.nightPluralCap') : 'Noites');
+    const nightWordLower = diffDays === 1 
+      ? (i18n ? i18n.t('booking.nightSingle') : 'noite') 
+      : (i18n ? i18n.t('booking.nightPlural') : 'noites');
+    const stayWord = i18n ? i18n.t('booking.stayWord') : 'de Estadia';
+    const toWord = i18n ? i18n.t('booking.toWord') : 'a';
+
+    const inWeekdayShort = i18n ? i18n.formatWeekday(inDate).split('-')[0] : inDate.toLocaleDateString('pt-BR', { weekday: 'long' }).split('-')[0];
+    const outWeekdayShort = i18n ? i18n.formatWeekday(outDate).split('-')[0] : outDate.toLocaleDateString('pt-BR', { weekday: 'long' }).split('-')[0];
 
     if (nightsSummaryText) {
-      nightsSummaryText.textContent = `${nightWord} de Estadia (${weekdaysPt[inDate.getDay()].split('-')[0]} a ${weekdaysPt[outDate.getDay()].split('-')[0]})`;
+      nightsSummaryText.textContent = `${diffDays} ${nightWordCap} ${stayWord} (${inWeekdayShort} ${toWord} ${outWeekdayShort})`;
     }
 
     if (connectorNightsPill) {
-      connectorNightsPill.textContent = `${diffDays} ${diffDays === 1 ? 'noite' : 'noites'}`;
+      connectorNightsPill.textContent = `${diffDays} ${nightWordLower}`;
+    }
+  };
+
+  // Atualizar subtextos dos seletores de hóspedes e acomodações no idioma ativo
+  const updateGuestsSubtext = () => {
+    if (!barGuests || !guestsSubtext) return;
+    const val = barGuests.value;
+    const i18n = window.RecantoI18n;
+    if (i18n) {
+      guestsSubtext.textContent = i18n.t(`booking.guestsSubtexts.${val}`) || i18n.t('booking.guestsSubtexts.couple');
+    }
+  };
+
+  const updateSuiteSubtext = () => {
+    if (!barSuite || !suiteSubtext) return;
+    const val = barSuite.value;
+    const i18n = window.RecantoI18n;
+    if (i18n) {
+      suiteSubtext.textContent = i18n.t(`booking.suiteSubtexts.${val}`) || i18n.t('booking.suiteSubtexts.all');
     }
   };
 
@@ -424,7 +469,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (checkinCell && barCheckin) {
     checkinCell.addEventListener('click', () => triggerPicker(barCheckin));
     barCheckin.addEventListener('change', () => {
-      // Ajustar min de checkout
       const inDate = parseLocalDate(barCheckin.value);
       const minOut = new Date(inDate);
       minOut.setDate(inDate.getDate() + 1);
@@ -442,35 +486,18 @@ document.addEventListener('DOMContentLoaded', () => {
     barCheckout.addEventListener('change', updateConsoleDisplays);
   }
 
-  // Atualizar legendas dos seletores de Hóspedes e Suítes
-  if (barGuests && guestsSubtext) {
-    const guestSubtextMap = {
-      '1 Hóspede (Individual)': '1 Suíte privativa • Conforto solo',
-      '2 Hóspedes (Casal / Duplo)': '1 Cama King • Perfeito para casal',
-      '3 Hóspedes (Triplo)': '1 Suíte espaçosa • Cama extra',
-      'Família (4 ou mais)': 'Acomodação família • Máxima comodidade'
-    };
-
-    barGuests.addEventListener('change', () => {
-      guestsSubtext.textContent = guestSubtextMap[barGuests.value] || '1 suíte privativa';
-    });
+  if (barGuests) {
+    barGuests.addEventListener('change', updateGuestsSubtext);
   }
 
-  if (barSuite && suiteSubtext) {
-    const suiteSubtextMap = {
-      'Todas as Acomodações': 'Melhor diária disponível',
-      'Suíte Costa Azul': 'A partir de R$ 720 / noite',
-      'Suíte Mirante da Pedra': 'A partir de R$ 940 / noite',
-      'Bangalô das Enseadas': 'A partir de R$ 1.180 / noite'
-    };
-
-    barSuite.addEventListener('change', () => {
-      suiteSubtext.textContent = suiteSubtextMap[barSuite.value] || 'Melhor diária disponível';
-    });
+  if (barSuite) {
+    barSuite.addEventListener('change', updateSuiteSubtext);
   }
 
   // Executar atualização inicial
   updateConsoleDisplays();
+  updateGuestsSubtext();
+  updateSuiteSubtext();
 
   // 4. Modal de Reserva
   const modalOverlay = document.getElementById('bookingModal');
@@ -489,10 +516,10 @@ document.addEventListener('DOMContentLoaded', () => {
     modalCheckout.value = checkoutStr;
   }
 
-  const openModal = (suiteName = '') => {
+  const openModal = (suiteKey = '') => {
     if (modalOverlay) {
-      if (suiteName && modalSuiteSelect) {
-        modalSuiteSelect.value = suiteName;
+      if (suiteKey && modalSuiteSelect) {
+        modalSuiteSelect.value = suiteKey;
       }
       modalOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -509,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
   openModalButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const suite = btn.getAttribute('data-suite') || '';
+      const suite = btn.getAttribute('data-suite') || 'any';
       openModal(suite);
     });
   });
@@ -521,29 +548,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Envio do Formulário de Reserva para o WhatsApp Oficial
+  // 5. Envio do Formulário de Reserva para o WhatsApp Oficial (com Localização de Mensagem)
   const WHATSAPP_NUMBER = "5528999750058"; 
 
-  const handleBookingSubmit = (checkin, checkout, guests, suite, name = '') => {
+  const handleBookingSubmit = (checkin, checkout, guestsKey, suiteKey, name = '') => {
     const inDate = parseLocalDate(checkin);
     const outDate = parseLocalDate(checkout);
     const diffTime = Math.abs(outDate - inDate);
     const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
+    const i18n = window.RecantoI18n;
+    const activeLocale = i18n ? i18n.currentLang : 'pt-BR';
 
-    const formattedIn = `${String(inDate.getDate()).padStart(2, '0')}/${String(inDate.getMonth() + 1).padStart(2, '0')}/${inDate.getFullYear()}`;
-    const formattedOut = `${String(outDate.getDate()).padStart(2, '0')}/${String(outDate.getMonth() + 1).padStart(2, '0')}/${outDate.getFullYear()}`;
+    // Datas formatadas conforme o idioma
+    const formattedIn = inDate.toLocaleDateString(activeLocale);
+    const formattedOut = outDate.toLocaleDateString(activeLocale);
+    const inWeekday = i18n ? i18n.formatWeekday(inDate) : inDate.toLocaleDateString('pt-BR', { weekday: 'long' });
+    const outWeekday = i18n ? i18n.formatWeekday(outDate) : outDate.toLocaleDateString('pt-BR', { weekday: 'long' });
 
-    const text = `🌊 *CONSULTA DE RESERVA — RECANTO DA PEDRA (IRIRI/ES)*
-${name ? `• *Hóspede:* ${name}\n` : ''}• *Check-in:* ${formattedIn} (${weekdaysPt[inDate.getDay()]})
-• *Check-out:* ${formattedOut} (${weekdaysPt[outDate.getDay()]})
-• *Duração:* ${nights} ${nights === 1 ? 'diária' : 'diárias'}
-• *Hóspedes:* ${guests}
-• *Acomodação:* ${suite}
-• *Origem:* Tarifa Oficial do Site (com Café da Manhã Capixaba Incluso)
+    // Rótulos de hóspedes e acomodação conforme o idioma
+    const guestsLabel = i18n ? i18n.t(`booking.guestsOptions.${guestsKey}`) || guestsKey : guestsKey;
+    const suiteLabel = i18n ? i18n.t(`booking.suiteOptions.${suiteKey}`) || suiteKey : suiteKey;
+    const dailyWord = nights === 1 
+      ? (i18n ? i18n.t('whatsappMessages.dailySingle') : 'diária') 
+      : (i18n ? i18n.t('whatsappMessages.dailyPlural') : 'diárias');
 
-Gostaria de verificar a disponibilidade e confirmar os valores para o período.`;
+    const headerLine = i18n ? i18n.t('whatsappMessages.bookingHeader') : '🌊 *CONSULTA DE RESERVA — RECANTO DA PEDRA (IRIRI/ES)*';
+    const guestLine = name ? (i18n ? i18n.t('whatsappMessages.guestLine', { name }) : `• *Hóspede:* ${name}`) : '';
+    const checkinLine = i18n ? i18n.t('whatsappMessages.checkinLine', { date: formattedIn, weekday: inWeekday }) : `• *Check-in:* ${formattedIn} (${inWeekday})`;
+    const checkoutLine = i18n ? i18n.t('whatsappMessages.checkoutLine', { date: formattedOut, weekday: outWeekday }) : `• *Check-out:* ${formattedOut} (${outWeekday})`;
+    const durationLine = i18n ? i18n.t('whatsappMessages.durationLine', { count: nights, word: dailyWord }) : `• *Duração:* ${nights} ${dailyWord}`;
+    const guestsLineFormatted = i18n ? i18n.t('whatsappMessages.guestsLine', { guests: guestsLabel }) : `• *Hóspedes:* ${guestsLabel}`;
+    const suiteLineFormatted = i18n ? i18n.t('whatsappMessages.suiteLine', { suite: suiteLabel }) : `• *Acomodação:* ${suiteLabel}`;
+    const sourceLine = i18n ? i18n.t('whatsappMessages.sourceLine') : '• *Origem:* Tarifa Oficial do Site (com Café da Manhã Capixaba Incluso)';
+    const promptLine = i18n ? i18n.t('whatsappMessages.footerPrompt') : 'Gostaria de verificar a disponibilidade e confirmar os valores para o período.';
 
-    const encodedText = encodeURIComponent(text);
+    let message = `${headerLine}\n`;
+    if (guestLine) message += `${guestLine}\n`;
+    message += `${checkinLine}\n${checkoutLine}\n${durationLine}\n${guestsLineFormatted}\n${suiteLineFormatted}\n${sourceLine}\n\n${promptLine}`;
+
+    const encodedText = encodeURIComponent(message);
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
     window.open(url, '_blank');
   };
@@ -555,8 +598,8 @@ Gostaria de verificar a disponibilidade e confirmar os valores para o período.`
       e.preventDefault();
       const checkin = barCheckin ? barCheckin.value : todayStr;
       const checkout = barCheckout ? barCheckout.value : checkoutStr;
-      const guests = barGuests ? barGuests.value : '2 Hóspedes';
-      const suite = barSuite ? barSuite.value : 'Todas as Acomodações';
+      const guests = barGuests ? barGuests.value : 'couple';
+      const suite = barSuite ? barSuite.value : 'all';
 
       handleBookingSubmit(checkin, checkout, guests, suite);
     });
@@ -578,53 +621,78 @@ Gostaria de verificar a disponibilidade e confirmar os valores para o período.`
     });
   }
 
+  // Atualizar links estáticos do WhatsApp com mensagens traduzidas
+  const updateWhatsAppLinks = () => {
+    const i18n = window.RecantoI18n;
+    if (!i18n) return;
+
+    const defaultMsg = encodeURIComponent(i18n.t('whatsappMessages.defaultInfo'));
+    const restaurantMsg = encodeURIComponent(i18n.t('whatsappMessages.restaurantTable'));
+
+    document.querySelectorAll('.js-wpp-info, .floating-whatsapp').forEach(link => {
+      link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${defaultMsg}`;
+    });
+
+    document.querySelectorAll('.js-wpp-restaurant').forEach(link => {
+      link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${restaurantMsg}`;
+    });
+
+    document.querySelectorAll('.js-wpp-booking').forEach(link => {
+      link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${defaultMsg}`;
+    });
+  };
+
   // 6. Status Dinâmico de Funcionamento (Horários Oficiais Recanto da Pedra)
   const updateBusinessStatus = () => {
     const statusBadge = document.getElementById('businessStatusBadge');
     const statusText = document.getElementById('businessStatusText');
     const todayHint = document.getElementById('businessTodayHint');
     const footerStatus = document.getElementById('footerStatusText');
+    const i18n = window.RecantoI18n;
 
     const now = new Date();
-    const day = now.getDay(); // 0 = Domingo, 1 = Segunda, 2 = Terça, 3 = Quarta, 4 = Quinta, 5 = Sexta, 6 = Sábado
+    const day = now.getDay(); // 0 = Domingo, 1 = Segunda, etc.
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-    // Horários Oficiais:
-    // Domingo: 11:00 às 16:00 (660 min a 960 min)
-    // Segunda a Sábado: 11:00 às 23:00 (660 min a 1380 min)
     const openMinute = 11 * 60; // 11:00
-    const closeMinute = day === 0 ? 16 * 60 : 23 * 60; // Domingo até 16:00, demais até 23:00
+    const closeMinute = day === 0 ? 16 * 60 : 23 * 60;
     const todayScheduleStr = day === 0 ? '11:00 – 16:00' : '11:00 – 23:00';
 
     const isOpen = currentMinutes >= openMinute && currentMinutes < closeMinute;
 
+    const textOpen = i18n ? i18n.t('info.statusOpen') : 'Aberto agora';
+    const textClosed = i18n ? i18n.t('info.statusClosed') : 'Fechado agora';
+    const todayPrefix = i18n ? i18n.t('info.todayPrefix') : 'Hoje:';
+    const nextOpening = i18n ? i18n.t('info.nextOpening') : 'Próxima abertura: 11:00';
+    const todayTagText = i18n ? i18n.t('info.todayTag') : 'Hoje';
+
     if (statusBadge && statusText) {
       if (isOpen) {
         statusBadge.className = 'business-status-badge status-open';
-        statusText.textContent = 'Aberto agora';
+        statusText.textContent = textOpen;
         if (todayHint) {
-          todayHint.textContent = `Hoje: ${todayScheduleStr}`;
+          todayHint.textContent = `${todayPrefix} ${todayScheduleStr}`;
         }
       } else {
         statusBadge.className = 'business-status-badge status-closed';
-        statusText.textContent = 'Fechado agora';
+        statusText.textContent = textClosed;
         if (todayHint) {
-          todayHint.textContent = 'Próxima abertura: 11:00';
+          todayHint.textContent = nextOpening;
         }
       }
     }
 
     if (footerStatus) {
       if (isOpen) {
-        footerStatus.innerHTML = `● Aberto agora • Hoje: ${todayScheduleStr}`;
+        footerStatus.innerHTML = `● ${textOpen} • ${todayPrefix} ${todayScheduleStr}`;
         footerStatus.style.color = '#10B981';
       } else {
-        footerStatus.innerHTML = `○ Fechado agora • Próxima abertura às 11:00`;
+        footerStatus.innerHTML = `○ ${textClosed} • ${nextOpening}`;
         footerStatus.style.color = 'var(--gold-glow)';
       }
     }
 
-    // Destacar o dia de hoje na lista vertical
+    // Destacar o dia de hoje na lista vertical com etiqueta traduzida
     document.querySelectorAll('.hours-row').forEach(row => {
       const rowDay = parseInt(row.getAttribute('data-day'), 10);
       const existingTag = row.querySelector('.today-tag');
@@ -636,7 +704,7 @@ Gostaria de verificar a disponibilidade e confirmar os valores para o período.`
         if (daySpan) {
           const tag = document.createElement('span');
           tag.className = 'today-tag';
-          tag.textContent = 'Hoje';
+          tag.textContent = todayTagText;
           daySpan.appendChild(tag);
         }
       } else {
@@ -645,7 +713,28 @@ Gostaria de verificar a disponibilidade e confirmar os valores para o período.`
     });
   };
 
-  // 11. CONTADOR ANIMADO OPCIONAL: elementos com data-contador contam de 0 até o valor definido (IntersectionObserver), uma única vez
+  // 7. Eventos do Seletor de Idioma
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetLang = btn.getAttribute('data-lang');
+      if (window.RecantoI18n && targetLang) {
+        window.RecantoI18n.setLanguage(targetLang);
+      }
+    });
+  });
+
+  // Reagir à mudança de idioma disparada pelo i18n
+  document.addEventListener('recantoLanguageChanged', () => {
+    updateConsoleDisplays();
+    updateGuestsSubtext();
+    updateSuiteSubtext();
+    updateBusinessStatus();
+    updateWhatsAppLinks();
+    applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
+  });
+
+  // 11. CONTADOR ANIMADO: elementos com data-contador contam de 0 até o valor definido (IntersectionObserver)
   const contadorElements = document.querySelectorAll('[data-contador]');
   if (contadorElements.length > 0 && 'IntersectionObserver' in window) {
     const contadorObserver = new IntersectionObserver((entries, observer) => {
@@ -657,20 +746,18 @@ Gostaria de verificar a disponibilidade e confirmar os valores para o período.`
           const targetValue = parseFloat(el.getAttribute('data-contador'));
           if (isNaN(targetValue)) return;
 
-          // Se o usuário prefere redução de movimento, o valor final já está visível
           if (prefersReducedMotion) {
             el.textContent = targetValue;
             return;
           }
 
-          const duration = 1600; // Duração suave de contagem
+          const duration = 1600;
           const startTime = performance.now();
           const isFloat = el.getAttribute('data-contador').includes('.');
 
           const animateCounter = (now) => {
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Easing cúbico desacelerado no final
             const easeOutProgress = 1 - Math.pow(1 - progress, 3);
             const current = targetValue * easeOutProgress;
 
@@ -683,7 +770,6 @@ Gostaria de verificar a disponibilidade e confirmar os valores para o período.`
             }
           };
 
-          // Inicia contagem do zero
           el.textContent = '0';
           requestAnimationFrame(animateCounter);
         }
@@ -695,7 +781,27 @@ Gostaria de verificar a disponibilidade e confirmar os valores para o período.`
     contadorElements.forEach(el => contadorObserver.observe(el));
   }
 
-  // Inicializar e atualizar a cada 60 segundos
+  // 12. Botão Voltar ao Topo (Back to Top com Font Awesome)
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add('is-visible');
+      } else {
+        backToTopBtn.classList.remove('is-visible');
+      }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    });
+  }
+
+  // Inicializações
   updateBusinessStatus();
+  updateWhatsAppLinks();
   setInterval(updateBusinessStatus, 60000);
 });

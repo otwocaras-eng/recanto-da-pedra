@@ -3,31 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recanto da Pedra — Pousada & Gastronomia em Iriri, ES</title>
-  <meta name="description" content="Um refúgio singular na Costa Azul de Iriri, Espírito Santo. Conexão autêntica com o mar, o costão de pedras e a alta gastronomia capixaba. Comer, descansar e contemplar.">
+  <title data-i18n="meta.title">Recanto da Pedra — Pousada &amp; Gastronomia em Iriri, ES</title>
+  <meta name="description" data-i18n-attr="content:meta.description" content="Um refúgio singular na Costa Azul de Iriri, Espírito Santo. Conexão autêntica com o mar, o costão de pedras e a alta gastronomia capixaba. Comer, descansar e contemplar.">
   
   <!-- Fontes Google com Curadoria Tipográfica -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Prevenção de FOUC e Detecção Imediata de Tema -->
+  <!-- Font Awesome 6 Free (Ícones Vetoriais Oficiais) com Preload Webfonts -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Prevenção de FOUC e Detecção Imediata de Tema & Idioma -->
   <meta name="color-scheme" content="light dark">
   <script>
     (function() {
       try {
+        // Detecção e aplicação imediata de tema
         var savedTheme = localStorage.getItem('recanto-theme');
         var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', theme);
+
+        // Detecção e aplicação imediata de idioma
+        var urlParams = new URLSearchParams(window.location.search);
+        var urlLang = urlParams.get('lang');
+        var savedLang = localStorage.getItem('recanto-lang');
+        var browserLang = (navigator.language || '').toLowerCase();
+        var initialLang = 'pt-BR';
+
+        if (urlLang) {
+          var clean = urlLang.toLowerCase();
+          if (clean.startsWith('en')) initialLang = 'en-US';
+          else if (clean.startsWith('es')) initialLang = 'es';
+          else if (clean.startsWith('pt')) initialLang = 'pt-BR';
+        } else if (savedLang && (savedLang === 'pt-BR' || savedLang === 'en-US' || savedLang === 'es')) {
+          initialLang = savedLang;
+        } else if (browserLang.startsWith('es')) {
+          initialLang = 'es';
+        } else if (!browserLang.startsWith('pt')) {
+          initialLang = 'en-US';
+        }
+        document.documentElement.setAttribute('lang', initialLang);
       } catch (e) {}
     })();
   </script>
+
+  <!-- Tags Canônicas e Alternativas de Idioma (hreflang) para Google SEO -->
+  <link rel="canonical" id="canonicalLink" href="http://localhost/recanto-da-pedra/pousada/">
+  <link rel="alternate" hreflang="pt-BR" href="http://localhost/recanto-da-pedra/pousada/">
+  <link rel="alternate" hreflang="en-US" href="http://localhost/recanto-da-pedra/pousada/en/">
+  <link rel="alternate" hreflang="es" href="http://localhost/recanto-da-pedra/pousada/es/">
+  <link rel="alternate" hreflang="x-default" href="http://localhost/recanto-da-pedra/pousada/">
+
+  <!-- Open Graph / Redes Sociais / WhatsApp Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Recanto da Pedra">
+  <meta property="og:url" content="http://localhost/recanto-da-pedra/pousada/">
+  <meta property="og:title" id="ogTitle" content="Recanto da Pedra — Pousada de Charme &amp; Gastronomia Capixaba">
+  <meta property="og:description" id="ogDesc" content="Viva a experiência única de se hospedar sobre as rochas da Costa Azul de Iriri, ES. Café da manhã artesanal incluso, suítes com vista mar e culinária autêntica.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&amp;fit=crop&amp;w=1200&amp;q=85">
+  <meta property="og:locale" id="ogLocale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="twitterTitle" content="Recanto da Pedra — Pousada &amp; Restaurante em Iriri, ES">
+  <meta name="twitter:description" id="twitterDesc" content="Refúgio exclusivo de frente para o mar com a legítima gastronomia capixaba na Costa Azul de Anchieta, Espírito Santo.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&amp;fit=crop&amp;w=1200&amp;q=85">
+
+  <!-- Dados Estruturados Schema.org para Motores de Busca (JSON-LD) -->
+  <script type="application/ld+json" id="schema-hotel">
+  {
+    "@context": "https://schema.org",
+    "@type": "Hotel",
+    "name": "Recanto da Pedra — Pousada & Gastronomia",
+    "description": "Pousada de charme frente ao mar na Costa Azul de Iriri, Anchieta, Espírito Santo. Acomodações exclusivas com vista panorâmica do oceano e café da manhã capixaba incluso.",
+    "url": "http://localhost/recanto-da-pedra/pousada/",
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "telephone": "+552835341599",
+    "priceRange": "R$ 720 - R$ 1.180",
+    "checkinTime": "14:00",
+    "checkoutTime": "12:00",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Adir, R. Ady Fernandes Mignone",
+      "addressLocality": "Iriri, Anchieta",
+      "addressRegion": "ES",
+      "postalCode": "29230-000",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -20.8247926,
+      "longitude": -40.6480112
+    }
+  }
+  </script>
+  <script type="application/ld+json" id="schema-restaurant">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Restaurante Recanto da Pedra",
+    "description": "Restaurante especializado em autêntica moqueca capixaba em panela de barro artesanal, frutos do mar nobres e coquetelaria autoral em Iriri, ES.",
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+    "telephone": "+552835341599",
+    "servesCuisine": ["Culinária Capixaba", "Frutos do Mar", "Gastronomia Brasileira Contemporânea"],
+    "priceRange": "$$$"
+  }
+  </script>
   
   <!-- Folha de Estilos Autoral -->
-  <link rel="stylesheet" href="css/style.css?v=2.2">
+  <link rel="stylesheet" href="css/style.css?v=3.2">
 </head>
 <body>
+
+  <!-- Anúncio Acessível de Mudança de Idioma para Leitores de Tela -->
+  <div id="i18nLiveAnnouncer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
   <!-- Barra de Progresso de Leitura Fixa no Topo -->
   <div class="reading-progress-bar" id="readingProgressBar" aria-hidden="true"></div>
@@ -35,50 +130,60 @@
   <!-- ==================== HEADER & NAVEGAÇÃO ==================== -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
-      <a href="#inicio" class="brand-logo" aria-label="Recanto da Pedra - Página Inicial">
-        <span class="brand-title">Recanto da Pedra</span>
-        <span class="brand-subtitle">Pousada & Gastronomia • Iriri, ES</span>
+      <a href="#inicio" class="brand-logo" aria-label="Recanto da Pedra - Página Inicial" data-i18n-attr="aria-label:brand.homeAria">
+        <span class="brand-title" data-i18n="brand.title">Recanto da Pedra</span>
+        <span class="brand-subtitle" data-i18n="brand.subtitle">Pousada &amp; Gastronomia • Iriri, ES</span>
       </a>
 
-      <nav class="main-nav" aria-label="Navegação Principal">
-        <a href="#o-refugio" class="nav-link">O Refúgio</a>
-        <a href="#acomodacoes" class="nav-link">Acomodações</a>
-        <a href="#gastronomia" class="nav-link">Gastronomia Capixaba</a>
-        <a href="#experiencias" class="nav-link">Experiências</a>
-        <a href="#informacoes" class="nav-link">Informações & Horários</a>
-        <a href="#localizacao" class="nav-link">Como Chegar</a>
+      <nav class="main-nav" aria-label="Navegação Principal" data-i18n-attr="aria-label:nav.ariaLabel">
+        <a href="#o-refugio" class="nav-link" data-i18n="nav.refugio">O Refúgio</a>
+        <a href="#acomodacoes" class="nav-link" data-i18n="nav.acomodacoes">Acomodações</a>
+        <a href="#gastronomia" class="nav-link" data-i18n="nav.gastronomia">Gastronomia Capixaba</a>
+        <a href="#experiencias" class="nav-link" data-i18n="nav.experiencias">Experiências</a>
+        <a href="#informacoes" class="nav-link" data-i18n="nav.informacoes">Informações &amp; Horários</a>
+        <a href="#localizacao" class="nav-link" data-i18n="nav.localizacao">Como Chegar</a>
         
-        <!-- Alternador no Menu Mobile -->
+        <!-- Seletor de Idioma no Menu Mobile -->
+        <div class="nav-lang-item">
+          <span class="nav-lang-label" data-i18n="lang.label">Idioma</span>
+          <div class="mobile-lang-selector" role="group" aria-label="Idioma / Language" data-i18n-attr="aria-label:lang.aria">
+            <button type="button" class="lang-btn active" data-lang="pt-BR" aria-label="Português (Brasil)" data-i18n-attr="aria-label:lang.ptTitle" data-i18n="lang.pt">PT</button>
+            <button type="button" class="lang-btn" data-lang="en-US" aria-label="English (US)" data-i18n-attr="aria-label:lang.enTitle" data-i18n="lang.en">EN</button>
+            <button type="button" class="lang-btn" data-lang="es" aria-label="Español" data-i18n-attr="aria-label:lang.esTitle" data-i18n="lang.es">ES</button>
+          </div>
+        </div>
+
+        <!-- Alternador de Tema no Menu Mobile -->
         <div class="nav-theme-item">
-          <span class="nav-theme-label">Aparência</span>
-          <button class="theme-toggle-pill" id="navThemeToggle" type="button" aria-label="Alternar modo escuro e claro">
-            <span class="pill-text-light">☀️ Modo Claro</span>
-            <span class="pill-text-dark">🌙 Modo Escuro</span>
+          <span class="nav-theme-label" data-i18n="nav.appearance">Aparência</span>
+          <button class="theme-toggle-pill" id="navThemeToggle" type="button" aria-label="Alternar modo escuro e claro" data-i18n-attr="aria-label:nav.themeAria">
+            <span class="pill-text-light"><i class="fa-solid fa-sun" aria-hidden="true" style="color: #f59e0b; margin-right: 6px;"></i><span data-i18n="nav.lightMode">Modo Claro</span></span>
+            <span class="pill-text-dark"><i class="fa-solid fa-moon" aria-hidden="true" style="color: var(--gold-glow); margin-right: 6px;"></i><span data-i18n="nav.darkMode">Modo Escuro</span></span>
           </button>
         </div>
       </nav>
 
       <div class="header-actions">
-        <!-- Botão Elegante de Alternância de Tema -->
-        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Alternar tema claro e escuro" title="Alternar modo escuro / claro">
-          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
+        <!-- Seletor Discreto e Elegante de Idioma (PT / EN / ES) -->
+        <div class="lang-selector" role="group" aria-label="Selecionar idioma" data-i18n-attr="aria-label:lang.aria">
+          <button type="button" class="lang-btn active" data-lang="pt-BR" title="Português (Brasil)" aria-label="Português (Brasil)" data-i18n-attr="title:lang.ptTitle,aria-label:lang.ptTitle" data-i18n="lang.pt">PT</button>
+          <button type="button" class="lang-btn" data-lang="en-US" title="English (US)" aria-label="English (US)" data-i18n-attr="title:lang.enTitle,aria-label:lang.enTitle" data-i18n="lang.en">EN</button>
+          <button type="button" class="lang-btn" data-lang="es" title="Español" aria-label="Español" data-i18n-attr="title:lang.esTitle,aria-label:lang.esTitle" data-i18n="lang.es">ES</button>
+        </div>
+
+        <!-- Botão Elegante de Alternância de Tema com Font Awesome -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Alternar tema claro e escuro" title="Alternar modo escuro / claro" data-i18n-attr="aria-label:nav.themeBtnAria,title:nav.themeBtnTitle">
+          <i class="fa-solid fa-sun theme-icon-sun" aria-hidden="true"></i>
+          <i class="fa-solid fa-moon theme-icon-moon" aria-hidden="true"></i>
         </button>
 
-        <a href="#reservar" class="btn btn-gold btn-header-reserve js-open-modal">Reservar Estadia</a>
-        <button class="mobile-toggle" aria-label="Abrir menu de navegação">☰</button>
+        <a href="#reservar" class="btn btn-gold btn-header-reserve js-open-modal">
+          <span data-i18n="nav.reserve">Reservar Estadia</span>
+          <i class="fa-solid fa-arrow-right btn-arrow" aria-hidden="true"></i>
+        </a>
+        <button class="mobile-toggle" aria-label="Abrir menu de navegação" data-i18n-attr="aria-label:nav.mobileToggleAria">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </header>
@@ -87,23 +192,26 @@
   <section class="hero-section" id="inicio">
     <div class="hero-backdrop">
       <div class="hero-parallax-wrap">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85" alt="Costão de pedras e mar azul cristalino em Iriri" class="hero-bg-img">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85" alt="Costão de pedras e mar azul cristalino em Iriri" class="hero-bg-img" data-i18n-attr="alt:hero.imgAlt">
       </div>
       <div class="hero-overlay"></div>
     </div>
 
     <div class="container hero-content">
-      <span class="hero-tag">Costa Azul • Espírito Santo</span>
-      <h1 class="hero-title">
+      <span class="hero-tag" data-i18n="hero.tag">Costa Azul • Espírito Santo</span>
+      <h1 class="hero-title" data-i18n="hero.titleHtml">
         Onde o mar toca a pedra<br>e o tempo <em>desacelera</em>.
       </h1>
-      <p class="hero-manifesto">
+      <p class="hero-manifesto" data-i18n="hero.manifesto">
         Um lugar especial de Iriri onde o visitante pode comer a autêntica gastronomia capixaba, descansar com o som das marés e contemplar o horizonte infinito.
       </p>
 
       <div class="hero-ctas">
-        <button class="btn btn-gold js-open-modal" data-suite="">Consultar Disponibilidade</button>
-        <a href="#acomodacoes" class="btn btn-outline-white">Conhecer as Suítes</a>
+        <button class="btn btn-gold js-open-modal" data-suite="">
+          <span data-i18n="hero.btnAvailability">Consultar Disponibilidade</span>
+          <i class="fa-solid fa-arrow-right btn-arrow" aria-hidden="true"></i>
+        </button>
+        <a href="#acomodacoes" class="btn btn-outline-white" data-i18n="hero.btnSuites">Conhecer as Suítes</a>
       </div>
 
       <!-- Console de Reserva de Luxo -->
@@ -111,10 +219,10 @@
         <div class="booking-console-topbar">
           <div class="console-pill-left">
             <span class="live-dot"></span>
-            <span>Tarifa Oficial Direta • Café da Manhã Capixaba Incluso</span>
+            <span data-i18n="hero.directRate">Tarifa Oficial Direta • Café da Manhã Capixaba Incluso</span>
           </div>
           <div class="console-nights-counter" id="nightsCounterBadge">
-            <span class="nights-icon">🌙</span>
+            <i class="fa-solid fa-moon nights-icon" aria-hidden="true"></i>
             <span id="nightsSummaryText">2 Noites de Estadia</span>
           </div>
         </div>
@@ -123,8 +231,8 @@
           <!-- Check-in -->
           <div class="luxury-booking-cell date-cell" id="checkinCell">
             <div class="cell-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-              <span>Entrada (Check-in)</span>
+              <i class="fa-solid fa-calendar-days cell-icon" aria-hidden="true"></i>
+              <span data-i18n="booking.checkinLabel">Entrada (Check-in)</span>
             </div>
             <div class="cell-content">
               <span class="date-large" id="checkinDayDisplay">29</span>
@@ -137,7 +245,7 @@
           </div>
 
           <!-- Divisor Conector com Noites -->
-          <div class="booking-connector" title="Duração da estadia">
+          <div class="booking-connector" title="Duração da estadia" data-i18n-attr="title:booking.connectorTitle">
             <span class="connector-line"></span>
             <span class="connector-pill" id="connectorNightsPill">2 noites</span>
             <span class="connector-line"></span>
@@ -146,8 +254,8 @@
           <!-- Check-out -->
           <div class="luxury-booking-cell date-cell" id="checkoutCell">
             <div class="cell-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-              <span>Saída (Check-out)</span>
+              <i class="fa-solid fa-calendar-days cell-icon" aria-hidden="true"></i>
+              <span data-i18n="booking.checkoutLabel">Saída (Check-out)</span>
             </div>
             <div class="cell-content">
               <span class="date-large" id="checkoutDayDisplay">01</span>
@@ -162,65 +270,65 @@
           <!-- Hóspedes -->
           <div class="luxury-booking-cell select-cell">
             <div class="cell-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              <span>Hóspedes</span>
+              <i class="fa-solid fa-user-group cell-icon" aria-hidden="true"></i>
+              <span data-i18n="booking.guestsLabel">Hóspedes</span>
             </div>
             <div class="cell-select-wrap">
               <select id="barGuests" name="guests" class="luxury-select">
-                <option value="2 Hóspedes (Casal / Duplo)" selected>2 Hóspedes (Casal / Duplo)</option>
-                <option value="1 Hóspede (Individual)">1 Hóspede (Individual)</option>
-                <option value="3 Hóspedes (Triplo)">3 Hóspedes (Triplo)</option>
-                <option value="Família (4 ou mais)">Família (4 ou mais)</option>
+                <option value="couple" selected data-i18n="booking.guestsOptions.couple">2 Hóspedes (Casal / Duplo)</option>
+                <option value="single" data-i18n="booking.guestsOptions.single">1 Hóspede (Individual)</option>
+                <option value="triple" data-i18n="booking.guestsOptions.triple">3 Hóspedes (Triplo)</option>
+                <option value="family" data-i18n="booking.guestsOptions.family">Família (4 ou mais)</option>
               </select>
               <span class="select-chevron">▾</span>
             </div>
-            <div class="cell-subtext" id="guestsSubtext">1 suíte privativa</div>
+            <div class="cell-subtext" id="guestsSubtext" data-i18n="booking.guestsSubtexts.couple">1 Cama King • Perfeito para casal</div>
           </div>
 
           <!-- Acomodação -->
           <div class="luxury-booking-cell select-cell suite-cell">
             <div class="cell-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-              <span>Acomodação</span>
+              <i class="fa-solid fa-bed cell-icon" aria-hidden="true"></i>
+              <span data-i18n="booking.suiteLabel">Acomodação</span>
             </div>
             <div class="cell-select-wrap">
               <select id="barSuite" name="suite" class="luxury-select">
-                <option value="Todas as Acomodações" selected>Todas as Acomodações</option>
-                <option value="Suíte Costa Azul">Suíte Costa Azul (Frente Mar)</option>
-                <option value="Suíte Mirante da Pedra">Suíte Mirante da Pedra (Panorâmica)</option>
-                <option value="Bangalô das Enseadas">Bangalô das Enseadas (Exclusivo)</option>
+                <option value="all" selected data-i18n="booking.suiteOptions.all">Todas as Acomodações</option>
+                <option value="costaAzul" data-i18n="booking.suiteOptions.costaAzul">Suíte Costa Azul (Frente Mar)</option>
+                <option value="mirante" data-i18n="booking.suiteOptions.mirante">Suíte Mirante da Pedra (Panorâmica)</option>
+                <option value="bangalo" data-i18n="booking.suiteOptions.bangalo">Bangalô das Enseadas (Exclusivo)</option>
               </select>
               <span class="select-chevron">▾</span>
             </div>
-            <div class="cell-subtext" id="suiteSubtext">Melhor diária disponível</div>
+            <div class="cell-subtext" id="suiteSubtext" data-i18n="booking.suiteSubtexts.all">Melhor diária disponível</div>
           </div>
 
           <!-- Botão de Ação -->
           <div class="luxury-booking-action">
             <button type="submit" class="btn-luxury-quote" id="btnQuoteSubmit">
               <span class="btn-quote-main">
-                <span>COTAR ESTADIA</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm4.52 11.9c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+                <span data-i18n="booking.quoteBtnMain">COTAR ESTADIA</span>
+                <i class="fa-brands fa-whatsapp quote-wpp-icon" aria-hidden="true"></i>
               </span>
-              <span class="btn-quote-sub">Direto pelo WhatsApp</span>
+              <span class="btn-quote-sub" data-i18n="booking.quoteBtnSub">Direto pelo WhatsApp</span>
             </button>
           </div>
         </form>
 
         <div class="booking-console-footer">
           <span class="feature-item">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Sem intermediários ou taxas ocultas
+            <i class="fa-solid fa-check feature-check-icon" aria-hidden="true"></i>
+            <span data-i18n="booking.featureNoFees">Sem intermediários ou taxas ocultas</span>
           </span>
           <span class="feature-separator">•</span>
           <span class="feature-item">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Atendimento imediato
+            <i class="fa-solid fa-check feature-check-icon" aria-hidden="true"></i>
+            <span data-i18n="booking.featureInstant">Atendimento imediato</span>
           </span>
           <span class="feature-separator">•</span>
           <span class="feature-item">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Frente para o mar de Iriri
+            <i class="fa-solid fa-check feature-check-icon" aria-hidden="true"></i>
+            <span data-i18n="booking.featureOceanfront">Frente para o mar de Iriri</span>
           </span>
         </div>
       </div>
@@ -231,30 +339,39 @@
   <section class="concept-section" id="o-refugio">
     <div class="container concept-grid">
       <div class="concept-text-col" data-reveal="left">
-        <span class="eyebrow eyebrow-left">O Conceito Autoral</span>
-        <h2 class="section-title">Comer, descansar e contemplar o mar de Iriri.</h2>
-        <p class="section-description">
+        <span class="eyebrow eyebrow-left" data-i18n="concept.eyebrow">O Conceito Autoral</span>
+        <h2 class="section-title" data-i18n="concept.title">Comer, descansar e contemplar o mar de Iriri.</h2>
+        <p class="section-description" data-i18n="concept.p1">
           O Recanto da Pedra nasceu do encontro espontâneo entre as falésias minerais de Iriri e as águas límpidas da Costa Azul. Não somos apenas uma pousada: somos um recanto com alma capixaba que convida você a desacelerar o ritmo, respirar a maresia fresca e desfrutar do que a vida tem de mais genuíno.
         </p>
-        <p class="section-description">
+        <p class="section-description" data-i18n="concept.p2">
           Arquitetura integrada ao relevo rochoso, deque em madeiras nobres sobre as pedras, jardins litorâneos e uma cozinha que honra as tradições da autêntica panela de barro de Goiabeiras com peixes e mariscos frescos da nossa própria costa.
         </p>
 
         <div class="concept-pillars" data-reveal-group>
           <div class="pillar-card" data-reveal="up">
+            <div class="icon-circle" style="margin-bottom: 1rem;">
+              <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+            </div>
             <span class="pillar-number">01</span>
-            <h3 class="pillar-title">Comer</h3>
-            <p class="pillar-desc">Culinária capixaba raiz e contemporânea, com ingredientes frescos e vista para o oceano.</p>
+            <h3 class="pillar-title" data-i18n="concept.pillar1Title">Comer</h3>
+            <p class="pillar-desc" data-i18n="concept.pillar1Desc">Culinária capixaba raiz e contemporânea, com ingredientes frescos e vista para o oceano.</p>
           </div>
           <div class="pillar-card" data-reveal="up">
+            <div class="icon-circle" style="margin-bottom: 1rem;">
+              <i class="fa-solid fa-bed" aria-hidden="true"></i>
+            </div>
             <span class="pillar-number">02</span>
-            <h3 class="pillar-title">Descansar</h3>
-            <p class="pillar-desc">Suítes arejadas, roupas de cama em puro algodão e o murmúrio constante das ondas.</p>
+            <h3 class="pillar-title" data-i18n="concept.pillar2Title">Descansar</h3>
+            <p class="pillar-desc" data-i18n="concept.pillar2Desc">Suítes arejadas, roupas de cama em puro algodão e o murmúrio constante das ondas.</p>
           </div>
           <div class="pillar-card" data-reveal="up">
+            <div class="icon-circle" style="margin-bottom: 1rem;">
+              <i class="fa-solid fa-water" aria-hidden="true"></i>
+            </div>
             <span class="pillar-number">03</span>
-            <h3 class="pillar-title">Contemplar</h3>
-            <p class="pillar-desc">O nascer do sol dourado no costão de pedra e o azul profundo da enseada de Iriri.</p>
+            <h3 class="pillar-title" data-i18n="concept.pillar3Title">Contemplar</h3>
+            <p class="pillar-desc" data-i18n="concept.pillar3Desc">O nascer do sol dourado no costão de pedra e o azul profundo da enseada de Iriri.</p>
           </div>
         </div>
       </div>
@@ -262,11 +379,11 @@
       <div class="concept-visual-col" data-reveal="right">
         <div class="visual-composition">
           <div class="img-main-frame">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" alt="Ambiente relaxante à beira-mar">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" alt="Ambiente relaxante à beira-mar" data-i18n-attr="alt:concept.imgAlt">
           </div>
           <div class="floating-badge">
-            <div class="badge-icon">⚓</div>
-            <p><strong>Privacidade & Serenidade:</strong> Apenas poucas suítes exclusivas para garantir tranquilidade absoluta.</p>
+            <div class="badge-icon"><i class="fa-solid fa-anchor" aria-hidden="true"></i></div>
+            <p data-i18n="concept.badgeHtml"><strong>Privacidade &amp; Serenidade:</strong> Apenas poucas suítes exclusivas para garantir tranquilidade absoluta.</p>
           </div>
         </div>
       </div>
@@ -277,9 +394,9 @@
   <section class="suites-section" id="acomodacoes">
     <div class="container">
       <div class="section-header-center" data-reveal="up">
-        <span class="eyebrow">Acomodações de Charme</span>
-        <h2 class="section-title">Refúgios voltados para o horizonte azul</h2>
-        <p class="section-description">
+        <span class="eyebrow" data-i18n="suites.eyebrow">Acomodações de Charme</span>
+        <h2 class="section-title" data-i18n="suites.title">Refúgios voltados para o horizonte azul</h2>
+        <p class="section-description" data-i18n="suites.description">
           Cada espaço foi desenhado para valorizar a luz natural litorânea, materiais orgânicos, texturas de madeira e a vista privilegiada das pedras e do mar de Iriri.
         </p>
       </div>
@@ -288,34 +405,37 @@
         <!-- Suíte 1 -->
         <article class="suite-card" data-reveal="up">
           <div class="suite-media">
-            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" alt="Suíte Costa Azul">
-            <span class="suite-tag">Frente Mar</span>
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" alt="Suíte Costa Azul" data-i18n-attr="alt:suites.suite1.imgAlt">
+            <span class="suite-tag" data-i18n="suites.suite1.tag">Frente Mar</span>
           </div>
           <div class="suite-body">
-            <h3 class="suite-title">Suíte Costa Azul</h3>
-            <p class="suite-desc">
+            <h3 class="suite-title" data-i18n="suites.suite1.name">Suíte Costa Azul</h3>
+            <p class="suite-desc" data-i18n="suites.suite1.desc">
               Ampla sacada privativa voltada para o oceano, cama King Size, ducha com vista para o horizonte e enxoval 400 fios.
             </p>
             <div class="suite-specs">
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-                48 m²
+                <i class="fa-solid fa-vector-square" aria-hidden="true"></i>
+                <span data-i18n="suites.suite1.spec1">48 m²</span>
               </span>
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Até 2 hóspedes
+                <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                <span data-i18n="suites.suite1.spec2">Até 2 hóspedes</span>
               </span>
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
-                Ar Split & Cafeteira
+                <i class="fa-solid fa-snowflake" aria-hidden="true"></i>
+                <span data-i18n="suites.suite1.spec3">Ar Split &amp; Cafeteira</span>
               </span>
             </div>
             <div class="suite-footer">
               <div class="suite-price-wrap">
-                <span class="price-prefix">Diárias a partir de</span>
-                <span class="suite-price">R$ 720 <span>/ noite</span></span>
+                <span class="price-prefix" data-i18n="suites.pricePrefix">Diárias a partir de</span>
+                <span class="suite-price"><span data-i18n="suites.suite1.price">R$ 720</span> <span data-i18n="suites.perNight">/ noite</span></span>
               </div>
-              <button class="btn btn-outline-dark btn-suite js-open-modal" data-suite="Suíte Costa Azul">Reservar</button>
+              <button class="btn btn-outline-dark btn-suite js-open-modal" data-suite="costaAzul">
+                <span data-i18n="suites.btnReserve">Reservar</span>
+                <i class="fa-solid fa-arrow-right btn-arrow" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
         </article>
@@ -323,34 +443,37 @@
         <!-- Suíte 2 -->
         <article class="suite-card" data-reveal="up">
           <div class="suite-media">
-            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="Suíte Mirante da Pedra">
-            <span class="suite-tag">Vista Panorâmica</span>
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="Suíte Mirante da Pedra" data-i18n-attr="alt:suites.suite2.imgAlt">
+            <span class="suite-tag" data-i18n="suites.suite2.tag">Vista Panorâmica</span>
           </div>
           <div class="suite-body">
-            <h3 class="suite-title">Suíte Mirante da Pedra</h3>
-            <p class="suite-desc">
+            <h3 class="suite-title" data-i18n="suites.suite2.name">Suíte Mirante da Pedra</h3>
+            <p class="suite-desc" data-i18n="suites.suite2.desc">
               Suspensa sobre o costão rochoso com janelas do chão ao teto. O espetáculo do pôr do sol direto da banheira de imersão.
             </p>
             <div class="suite-specs">
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-                56 m²
+                <i class="fa-solid fa-vector-square" aria-hidden="true"></i>
+                <span data-i18n="suites.suite2.spec1">56 m²</span>
               </span>
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Até 3 hóspedes
+                <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                <span data-i18n="suites.suite2.spec2">Até 3 hóspedes</span>
               </span>
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 14 16 14"/></svg>
-                Banheira Imersão
+                <i class="fa-solid fa-bath" aria-hidden="true"></i>
+                <span data-i18n="suites.suite2.spec3">Banheira Imersão</span>
               </span>
             </div>
             <div class="suite-footer">
               <div class="suite-price-wrap">
-                <span class="price-prefix">Diárias a partir de</span>
-                <span class="suite-price">R$ 940 <span>/ noite</span></span>
+                <span class="price-prefix" data-i18n="suites.pricePrefix">Diárias a partir de</span>
+                <span class="suite-price"><span data-i18n="suites.suite2.price">R$ 940</span> <span data-i18n="suites.perNight">/ noite</span></span>
               </div>
-              <button class="btn btn-outline-dark btn-suite js-open-modal" data-suite="Suíte Mirante da Pedra">Reservar</button>
+              <button class="btn btn-outline-dark btn-suite js-open-modal" data-suite="mirante">
+                <span data-i18n="suites.btnReserve">Reservar</span>
+                <i class="fa-solid fa-arrow-right btn-arrow" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
         </article>
@@ -358,34 +481,37 @@
         <!-- Suíte 3 -->
         <article class="suite-card" data-reveal="up">
           <div class="suite-media">
-            <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80" alt="Bangalô das Enseadas">
-            <span class="suite-tag">Máxima Exclusividade</span>
+            <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80" alt="Bangalô das Enseadas" data-i18n-attr="alt:suites.suite3.imgAlt">
+            <span class="suite-tag" data-i18n="suites.suite3.tag">Máxima Exclusividade</span>
           </div>
           <div class="suite-body">
-            <h3 class="suite-title">Bangalô das Enseadas</h3>
-            <p class="suite-desc">
+            <h3 class="suite-title" data-i18n="suites.suite3.name">Bangalô das Enseadas</h3>
+            <p class="suite-desc" data-i18n="suites.suite3.desc">
               Estrutura independente com deque privativo em madeira, solário com espreguiçadeiras e acesso reservado à área das pedras.
             </p>
             <div class="suite-specs">
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-                68 m²
+                <i class="fa-solid fa-vector-square" aria-hidden="true"></i>
+                <span data-i18n="suites.suite3.spec1">68 m²</span>
               </span>
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Até 4 hóspedes
+                <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                <span data-i18n="suites.suite3.spec2">Até 4 hóspedes</span>
               </span>
               <span class="spec-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                Deque & Lounge
+                <i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i>
+                <span data-i18n="suites.suite3.spec3">Deque &amp; Lounge</span>
               </span>
             </div>
             <div class="suite-footer">
               <div class="suite-price-wrap">
-                <span class="price-prefix">Diárias a partir de</span>
-                <span class="suite-price">R$ 1.180 <span>/ noite</span></span>
+                <span class="price-prefix" data-i18n="suites.pricePrefix">Diárias a partir de</span>
+                <span class="suite-price"><span data-i18n="suites.suite3.price">R$ 1.180</span> <span data-i18n="suites.perNight">/ noite</span></span>
               </div>
-              <button class="btn btn-outline-dark btn-suite js-open-modal" data-suite="Bangalô das Enseadas">Reservar</button>
+              <button class="btn btn-outline-dark btn-suite js-open-modal" data-suite="bangalo">
+                <span data-i18n="suites.btnReserve">Reservar</span>
+                <i class="fa-solid fa-arrow-right btn-arrow" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
         </article>
@@ -397,66 +523,74 @@
   <section class="gastronomy-section" id="gastronomia">
     <div class="container gastronomy-grid">
       <div class="gastronomy-content" data-reveal="left">
-        <span class="eyebrow" style="color: var(--gold-glow);">Gastronomia & Tradição</span>
-        <h2 class="section-title">Sabores que nascem do mar e da terra capixaba</h2>
-        <p>
-          "Moqueca é capixaba, o resto é peixada." Aqui no Recanto da Pedra, essa afirmação ganha vida em panelas de barro artesanais, azeite de urucum puro, coentro fresco e peixes nobres pescados diariamente em Iriri e Anchieta.
+        <span class="eyebrow" style="color: var(--gold-glow);" data-i18n="gastronomy.eyebrow">Gastronomia &amp; Tradição</span>
+        <h2 class="section-title" data-i18n="gastronomy.title">Sabores que nascem do mar e da terra capixaba</h2>
+        <p data-i18n="gastronomy.quote">
+          “Moqueca é capixaba, o resto é peixada.” Aqui no Recanto da Pedra, essa afirmação ganha vida em panelas de barro artesanais, azeite de urucum puro, coentro fresco e peixes nobres pescados diariamente em Iriri e Anchieta.
         </p>
 
         <div class="dish-highlights" data-reveal-group>
           <div class="dish-item" data-reveal="left">
-            <div class="dish-icon">🍲</div>
+            <div class="icon-circle">
+              <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+            </div>
             <div>
-              <h3 class="dish-title">Moqueca Capixaba de Badejo & Camarão VG</h3>
-              <p class="dish-desc">Cozida lentamente na panela de barro artesanal, servida com pirão aveludado e arroz de coco fresco.</p>
+              <h3 class="dish-title" data-i18n="gastronomy.dish1Title">Moqueca Capixaba de Badejo &amp; Camarão VG</h3>
+              <p class="dish-desc" data-i18n="gastronomy.dish1Desc">Cozida lentamente na panela de barro artesanal, servida com pirão aveludado e arroz de coco fresco.</p>
             </div>
           </div>
 
           <div class="dish-item" data-reveal="left">
-            <div class="dish-icon">🦐</div>
+            <div class="icon-circle">
+              <i class="fa-solid fa-fish" aria-hidden="true"></i>
+            </div>
             <div>
-              <h3 class="dish-title">Torta Capixaba Tradicional & Mariscos</h3>
-              <p class="dish-desc">Receita histórica do litoral do Espírito Santo, unindo siri desfiado, bacalhau, camarões e palmito fresco.</p>
+              <h3 class="dish-title" data-i18n="gastronomy.dish2Title">Torta Capixaba Tradicional &amp; Mariscos</h3>
+              <p class="dish-desc" data-i18n="gastronomy.dish2Desc">Receita histórica do litoral do Espírito Santo, unindo siri desfiado, bacalhau, camarões e palmito fresco.</p>
             </div>
           </div>
 
           <div class="dish-item" data-reveal="left">
-            <div class="dish-icon">🍸</div>
+            <div class="icon-circle">
+              <i class="fa-solid fa-wine-glass" aria-hidden="true"></i>
+            </div>
             <div>
-              <h3 class="dish-title">Coquetelaria Autoral Costa Azul</h3>
-              <p class="dish-desc">Drinks refrescantes criados com frutas litorâneas, cachaças artesanais capixabas e especiarias.</p>
+              <h3 class="dish-title" data-i18n="gastronomy.dish3Title">Coquetelaria Autoral Costa Azul</h3>
+              <p class="dish-desc" data-i18n="gastronomy.dish3Desc">Drinks refrescantes criados com frutas litorâneas, cachaças artesanais capixabas e especiarias.</p>
             </div>
           </div>
         </div>
 
-        <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20reservar%20uma%20mesa%20no%20Restaurante%20do%20Recanto%20da%20Pedra" target="_blank" class="btn btn-gold">Reservar Mesa no Restaurante</a>
+        <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20reservar%20uma%20mesa%20no%20Restaurante%20do%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="btn btn-gold js-wpp-restaurant">
+          <i class="fa-brands fa-whatsapp" style="margin-right: 6px;" aria-hidden="true"></i>
+          <span data-i18n="gastronomy.btnReserveTable">Reservar Mesa no Restaurante</span>
+        </a>
       </div>
 
       <div class="gastronomy-gallery" data-reveal-group>
         <div class="gastro-card tall" data-reveal="zoom">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Moqueca Capixaba tradicional na panela de barro">
-          <div class="gastro-caption">Autêntica Moqueca Capixaba</div>
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Moqueca Capixaba tradicional na panela de barro" data-i18n-attr="alt:gastronomy.imgAltMoqueca">
+          <div class="gastro-caption" data-i18n="gastronomy.captionMoqueca">Autêntica Moqueca Capixaba</div>
         </div>
         <div class="gastro-card" data-reveal="right">
-          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Restaurante com vista panorâmica para o mar">
-          <div class="gastro-caption">Salão com vista para as pedras</div>
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Restaurante com vista panorâmica para o mar" data-i18n-attr="alt:gastronomy.imgAltHall">
+          <div class="gastro-caption" data-i18n="gastronomy.captionHall">Salão com vista para as pedras</div>
         </div>
         <div class="gastro-card" data-reveal="right">
-          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="Drinks refrescantes à beira-mar">
-          <div class="gastro-caption">Coquetéis ao entardecer</div>
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="Drinks refrescantes à beira-mar" data-i18n-attr="alt:gastronomy.imgAltDrinks">
+          <div class="gastro-caption" data-i18n="gastronomy.captionDrinks">Coquetéis ao entardecer</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ==================== EXPERIÊNCIAS & IRIRI ==================== -->
-  <!-- ==================== EXPERIÊNCIAS & IRIRI ==================== -->
   <section class="experiences-section" id="experiencias">
     <div class="container">
       <div class="section-header-center" data-reveal="up">
-        <span class="eyebrow">Momentos Únicos</span>
-        <h2 class="section-title">O Encanto da Costa Azul</h2>
-        <p class="section-description">
+        <span class="eyebrow" data-i18n="experiences.eyebrow">Momentos Únicos</span>
+        <h2 class="section-title" data-i18n="experiences.title">O Encanto da Costa Azul</h2>
+        <p class="section-description" data-i18n="experiences.description">
           Iriri é reconhecida carinhosamente como o balneário mais charmoso do Espírito Santo. De enseadas mornas a costões rochosos esculpidos pelo vento, viva cada detalhe.
         </p>
       </div>
@@ -464,41 +598,53 @@
       <div class="exp-grid" data-reveal-group>
         <div class="exp-card" data-reveal="up">
           <div class="exp-img-wrap">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Piscinas naturais nas pedras de Iriri">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Piscinas naturais nas pedras de Iriri" data-i18n-attr="alt:experiences.exp1ImgAlt">
+            <div class="exp-badge-icon" title="Piscinas Naturais">
+              <i class="fa-solid fa-water" aria-hidden="true"></i>
+            </div>
           </div>
           <div class="exp-info">
-            <h3 class="exp-title">Piscinas Naturais</h3>
-            <p class="exp-desc">Mergulho tranquilo entre os recifes e costões rochosos logo em frente ao Recanto.</p>
+            <h3 class="exp-title" data-i18n="experiences.exp1Title">Piscinas Naturais</h3>
+            <p class="exp-desc" data-i18n="experiences.exp1Desc">Mergulho tranquilo entre os recifes e costões rochosos logo em frente ao Recanto.</p>
           </div>
         </div>
 
         <div class="exp-card" data-reveal="up">
           <div class="exp-img-wrap">
-            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Café da manhã artesanal ao ar livre">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Café da manhã artesanal ao ar livre" data-i18n-attr="alt:experiences.exp2ImgAlt">
+            <div class="exp-badge-icon" title="Café da Manhã">
+              <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
+            </div>
           </div>
           <div class="exp-info">
-            <h3 class="exp-title">Café da Manhã na Brisa</h3>
-            <p class="exp-desc">Pães artesanais, bolos caseiros, queijos do estado e frutas frescas servidos de frente para o mar.</p>
+            <h3 class="exp-title" data-i18n="experiences.exp2Title">Café da Manhã na Brisa</h3>
+            <p class="exp-desc" data-i18n="experiences.exp2Desc">Pães artesanais, bolos caseiros, queijos do estado e frutas frescas servidos de frente para o mar.</p>
           </div>
         </div>
 
         <div class="exp-card" data-reveal="up">
           <div class="exp-img-wrap">
-            <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80" alt="Pôr do Sol no costão rochoso">
+            <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80" alt="Pôr do Sol no costão rochoso" data-i18n-attr="alt:experiences.exp3ImgAlt">
+            <div class="exp-badge-icon" title="Pôr do Sol">
+              <i class="fa-solid fa-sun" aria-hidden="true"></i>
+            </div>
           </div>
           <div class="exp-info">
-            <h3 class="exp-title">Pôr do Sol Dourado</h3>
-            <p class="exp-desc">O espetáculo diário das cores do entardecer refletindo nas rochas graníticas de Iriri.</p>
+            <h3 class="exp-title" data-i18n="experiences.exp3Title">Pôr do Sol Dourado</h3>
+            <p class="exp-desc" data-i18n="experiences.exp3Desc">O espetáculo diário das cores do entardecer refletindo nas rochas graníticas de Iriri.</p>
           </div>
         </div>
 
         <div class="exp-card" data-reveal="up">
           <div class="exp-img-wrap">
-            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Passeios náuticos pelas enseadas de Anchieta">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Passeios náuticos pelas enseadas de Anchieta" data-i18n-attr="alt:experiences.exp4ImgAlt">
+            <div class="exp-badge-icon" title="Passeios Náuticos">
+              <i class="fa-solid fa-sailboat" aria-hidden="true"></i>
+            </div>
           </div>
           <div class="exp-info">
-            <h3 class="exp-title">Passeios de Barco</h3>
-            <p class="exp-desc">Navegue pelas enseadas de Areia Preta, Costa Azul, Namorados e Santa Helena.</p>
+            <h3 class="exp-title" data-i18n="experiences.exp4Title">Passeios de Barco</h3>
+            <p class="exp-desc" data-i18n="experiences.exp4Desc">Navegue pelas enseadas de Areia Preta, Costa Azul, Namorados e Santa Helena.</p>
           </div>
         </div>
       </div>
@@ -509,49 +655,67 @@
   <section class="reviews-section">
     <div class="container">
       <div class="section-header-center" data-reveal="up">
-        <span class="eyebrow">Memórias de Quem Viveu</span>
-        <h2 class="section-title">Palavras de Nossos Hóspedes</h2>
+        <span class="eyebrow" data-i18n="reviews.eyebrow">Memórias de Quem Viveu</span>
+        <h2 class="section-title" data-i18n="reviews.title">Palavras de Nossos Hóspedes</h2>
       </div>
 
       <div class="reviews-grid" data-reveal-group>
         <div class="review-card" data-reveal="up">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-quote">
-            "Acordar com o barulho do mar batendo nas pedras e tomar um café impecável olhando a Costa Azul não tem preço. A moqueca servida no restaurante é uma das melhores que comi em todo o Espírito Santo."
+          <div class="review-stars" aria-label="5 de 5 estrelas">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+          </div>
+          <p class="review-quote" data-i18n="reviews.rev1Quote">
+            “Acordar com o barulho do mar batendo nas pedras e tomar um café impecável olhando a Costa Azul não tem preço. A moqueca servida no restaurante é uma das melhores que comi em todo o Espírito Santo.”
           </p>
           <div class="review-author">
             <div class="author-avatar">MS</div>
             <div>
-              <div class="author-name">Mariana Silveira</div>
-              <div class="author-origin">Belo Horizonte, MG</div>
+              <div class="author-name" data-i18n="reviews.rev1Author">Mariana Silveira</div>
+              <div class="author-origin" data-i18n="reviews.rev1City">Belo Horizonte, MG</div>
             </div>
           </div>
         </div>
 
         <div class="review-card" data-reveal="up">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-quote">
-            "O cuidado com a estética e o silêncio são impressionantes. Uma hospedagem que respeita a natureza e oferece um conforto no nível das melhores pousadas de charme do Brasil."
+          <div class="review-stars" aria-label="5 de 5 estrelas">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+          </div>
+          <p class="review-quote" data-i18n="reviews.rev2Quote">
+            “O cuidado com a estética e o silêncio são impressionantes. Uma hospedagem que respeita a natureza e oferece um conforto no nível das melhores pousadas de charme do Brasil.”
           </p>
           <div class="review-author">
             <div class="author-avatar">RF</div>
             <div>
-              <div class="author-name">Rodrigo Furtado</div>
-              <div class="author-origin">Vitória, ES</div>
+              <div class="author-name" data-i18n="reviews.rev2Author">Rodrigo Furtado</div>
+              <div class="author-origin" data-i18n="reviews.rev2City">Vitória, ES</div>
             </div>
           </div>
         </div>
 
         <div class="review-card" data-reveal="up">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-quote">
-            "Lugar perfeito para casais que buscam descansar de verdade. Tomar um vinho no deque sobre as rochas ao entardecer é uma experiência mágica."
+          <div class="review-stars" aria-label="5 de 5 estrelas">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+          </div>
+          <p class="review-quote" data-i18n="reviews.rev3Quote">
+            “Lugar perfeito para casais que buscam descansar de verdade. Tomar um vinho no deque sobre as rochas ao entardecer é uma experiência mágica.”
           </p>
           <div class="review-author">
             <div class="author-avatar">CP</div>
             <div>
-              <div class="author-name">Carla & Paulo Mendes</div>
-              <div class="author-origin">Rio de Janeiro, RJ</div>
+              <div class="author-name" data-i18n="reviews.rev3Author">Carla &amp; Paulo Mendes</div>
+              <div class="author-origin" data-i18n="reviews.rev3City">Rio de Janeiro, RJ</div>
             </div>
           </div>
         </div>
@@ -563,9 +727,9 @@
   <section class="location-section" id="informacoes">
     <div class="container">
       <div class="section-header-center" style="margin-bottom: 2.8rem;" data-reveal="up">
-        <span class="eyebrow">Informações Oficiais</span>
-        <h2 class="section-title">Localização, Horários & Atendimento</h2>
-        <p class="section-description">
+        <span class="eyebrow" data-i18n="info.eyebrow">Informações Oficiais</span>
+        <h2 class="section-title" data-i18n="info.title">Localização, Horários &amp; Atendimento</h2>
+        <p class="section-description" data-i18n="info.description">
           Planeje sua visita ao nosso restaurante e pousada na Costa Azul de Anchieta. Estamos de portas abertas para acolher você de frente para o mar.
         </p>
       </div>
@@ -577,12 +741,12 @@
           <div>
             <div class="info-card-header">
               <div class="info-card-title-group">
-                <span class="info-icon">🕐</span>
-                <h3 class="info-card-title">Horário de Funcionamento</h3>
+                <i class="fa-solid fa-clock info-fa-icon" aria-hidden="true"></i>
+                <h3 class="info-card-title" data-i18n="info.hoursTitle">Horário de Funcionamento</h3>
               </div>
               <div class="business-status-badge status-open" id="businessStatusBadge">
                 <span class="status-pulse-dot"></span>
-                <span id="businessStatusText">Aberto agora</span>
+                <span id="businessStatusText" data-i18n="info.statusOpen">Aberto agora</span>
               </div>
             </div>
 
@@ -590,31 +754,31 @@
 
             <div class="hours-vertical-list">
               <div class="hours-row" data-day="2">
-                <span class="hours-day">Terça-feira</span>
+                <span class="hours-day" data-i18n="info.days.tuesday">Terça-feira</span>
                 <span class="hours-time">11:00 – 23:00</span>
               </div>
               <div class="hours-row" data-day="3">
-                <span class="hours-day">Quarta-feira</span>
+                <span class="hours-day" data-i18n="info.days.wednesday">Quarta-feira</span>
                 <span class="hours-time">11:00 – 23:00</span>
               </div>
               <div class="hours-row" data-day="4">
-                <span class="hours-day">Quinta-feira</span>
+                <span class="hours-day" data-i18n="info.days.thursday">Quinta-feira</span>
                 <span class="hours-time">11:00 – 23:00</span>
               </div>
               <div class="hours-row" data-day="5">
-                <span class="hours-day">Sexta-feira</span>
+                <span class="hours-day" data-i18n="info.days.friday">Sexta-feira</span>
                 <span class="hours-time">11:00 – 23:00</span>
               </div>
               <div class="hours-row" data-day="6">
-                <span class="hours-day">Sábado</span>
+                <span class="hours-day" data-i18n="info.days.saturday">Sábado</span>
                 <span class="hours-time">11:00 – 23:00</span>
               </div>
               <div class="hours-row" data-day="0">
-                <span class="hours-day">Domingo</span>
+                <span class="hours-day" data-i18n="info.days.sunday">Domingo</span>
                 <span class="hours-time">11:00 – 16:00</span>
               </div>
               <div class="hours-row" data-day="1">
-                <span class="hours-day">Segunda-feira</span>
+                <span class="hours-day" data-i18n="info.days.monday">Segunda-feira</span>
                 <span class="hours-time">11:00 – 23:00</span>
               </div>
             </div>
@@ -626,8 +790,8 @@
           <div>
             <div class="info-card-header">
               <div class="info-card-title-group">
-                <span class="info-icon">📞</span>
-                <h3 class="info-card-title">Canais de Atendimento</h3>
+                <i class="fa-solid fa-headset info-fa-icon" aria-hidden="true"></i>
+                <h3 class="info-card-title" data-i18n="info.contactsTitle">Canais de Atendimento</h3>
               </div>
             </div>
 
@@ -635,24 +799,30 @@
               <!-- Telefone Comercial -->
               <div class="contact-action-item">
                 <div class="contact-info-col">
-                  <span class="contact-type-label">☎ Telefone Comercial</span>
+                  <span class="contact-type-label">
+                    <i class="fa-solid fa-phone contact-fa-icon" aria-hidden="true"></i>
+                    <span data-i18n="info.phoneLabel">Telefone Comercial</span>
+                  </span>
                   <a href="tel:+552835341599" class="contact-number-val">(28) 3534-1599</a>
                 </div>
-                <a href="tel:+552835341599" class="btn-contact-action btn-call" aria-label="Ligar para o telefone fixo">
-                  <span>LIGAR</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <a href="tel:+552835341599" class="btn-contact-action btn-call" aria-label="Ligar para o telefone fixo" data-i18n-attr="aria-label:info.phoneAria,title:info.phoneTitle">
+                  <span data-i18n="info.phoneBtn">LIGAR</span>
+                  <i class="fa-solid fa-phone-flip" aria-hidden="true" style="font-size: var(--icon-xs); margin-left: 6px;"></i>
                 </a>
               </div>
 
               <!-- WhatsApp Oficial -->
               <div class="contact-action-item">
                 <div class="contact-info-col">
-                  <span class="contact-type-label">💬 WhatsApp Oficial</span>
+                  <span class="contact-type-label">
+                    <i class="fa-brands fa-whatsapp contact-fa-icon" style="color: #25D366;" aria-hidden="true"></i>
+                    <span data-i18n="info.wppLabel">WhatsApp Oficial</span>
+                  </span>
                   <a href="https://wa.me/5528999750058" target="_blank" rel="noopener noreferrer" class="contact-number-val">(28) 99975-0058</a>
                 </div>
-                <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-wpp-action" aria-label="Enviar mensagem no WhatsApp">
-                  <span>WHATSAPP</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm4.52 11.9c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+                <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-wpp-action js-wpp-info" aria-label="Enviar mensagem no WhatsApp" data-i18n-attr="aria-label:info.wppAria,title:info.wppTitle">
+                  <span data-i18n="info.wppBtn">WHATSAPP</span>
+                  <i class="fa-brands fa-whatsapp" aria-hidden="true" style="font-size: var(--icon-xs); margin-left: 6px;"></i>
                 </a>
               </div>
             </div>
@@ -663,57 +833,73 @@
       <!-- Localização Geográfica e Mapa -->
       <div class="location-grid" id="localizacao">
         <div class="location-text" data-reveal="left">
-          <span class="eyebrow eyebrow-left">📍 Localização Oficial</span>
-          <h3 class="section-title" style="font-size: 1.85rem; margin-bottom: 1.2rem;">Onde Encontrar o Recanto</h3>
+          <span class="eyebrow eyebrow-left">
+            <i class="fa-solid fa-location-dot" style="margin-right: 4px;" aria-hidden="true"></i>
+            <span data-i18n="location.eyebrow">Localização Oficial</span>
+          </span>
+          <h3 class="section-title" style="font-size: 1.85rem; margin-bottom: 1.2rem;" data-i18n="location.title">Onde Encontrar o Recanto</h3>
           
           <div class="address-card-content" style="margin-bottom: 1.8rem;">
-            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Adir,+R.+Ady+Fernandes+Mignone,+Anchieta+-+ES,+29230-000" target="_blank" rel="noopener noreferrer" class="address-display-link" title="Clique para abrir no Google Maps">
+            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Adir,+R.+Ady+Fernandes+Mignone,+Anchieta+-+ES,+29230-000" target="_blank" rel="noopener noreferrer" class="address-display-link" title="Clique para abrir no Google Maps" data-i18n-attr="title:location.addressTitle">
               <div class="address-main-text">
-                <span style="font-size: 1.3rem;">📍</span>
+                <i class="fa-solid fa-location-dot" style="font-size: 1.3rem; color: var(--gold-sand);" aria-hidden="true"></i>
                 <span class="address-lines">
-                  <strong>Rua Adir, R. Ady Fernandes Mignone</strong>
-                  <span>Anchieta – ES, 29230-000</span>
+                  <strong data-i18n="location.addressStreet">Rua Adir, R. Ady Fernandes Mignone</strong>
+                  <span data-i18n="location.addressCity">Anchieta – ES, 29230-000</span>
                 </span>
               </div>
               <span class="address-sub-hint">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                Toque para abrir a rota no Google Maps
+                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" style="font-size: var(--icon-xs); margin-right: 4px;"></i>
+                <span data-i18n="location.addressHint">Toque para abrir a rota no Google Maps</span>
               </span>
             </a>
           </div>
 
-          <div class="routes-list">
-            <div class="route-item">
-              <span class="route-badge">Vitória / ES</span>
+          <div class="routes-list" data-reveal-group>
+            <div class="route-item" data-reveal="left">
+              <span class="route-badge">
+                <i class="fa-solid fa-route" aria-hidden="true"></i>
+                <span data-i18n="location.route1Badge">Vitória / ES</span>
+              </span>
               <div class="route-desc">
-                <strong><span data-contador="92">92</span> km via Rodovia do Sol (ES-060)</strong>
-                <span>Aproximadamente 1h20 em trajeto panorâmico litorâneo por Guarapari.</span>
+                <strong><span data-contador="92">92</span> <span data-i18n="location.route1Dist">km via Rodovia do Sol (ES-060)</span></strong>
+                <span data-i18n="location.route1Desc">Aproximadamente 1h20 em trajeto panorâmico litorâneo por Guarapari.</span>
               </div>
             </div>
 
-            <div class="route-item">
-              <span class="route-badge">Belo Horizonte / MG</span>
+            <div class="route-item" data-reveal="left">
+              <span class="route-badge">
+                <i class="fa-solid fa-car-side" aria-hidden="true"></i>
+                <span data-i18n="location.route2Badge">Belo Horizonte / MG</span>
+              </span>
               <div class="route-desc">
-                <strong><span data-contador="460">460</span> km via BR-262 e BR-101</strong>
-                <span>Acesso direto ao balneário de Iriri com asfalto até o Recanto.</span>
+                <strong><span data-contador="460">460</span> <span data-i18n="location.route2Dist">km via BR-262 e BR-101</span></strong>
+                <span data-i18n="location.route2Desc">Acesso direto ao balneário de Iriri com asfalto até o Recanto.</span>
               </div>
             </div>
 
-            <div class="route-item">
-              <span class="route-badge">Rio de Janeiro / RJ</span>
+            <div class="route-item" data-reveal="left">
+              <span class="route-badge">
+                <i class="fa-solid fa-road" aria-hidden="true"></i>
+                <span data-i18n="location.route3Badge">Rio de Janeiro / RJ</span>
+              </span>
               <div class="route-desc">
-                <strong><span data-contador="440">440</span> km via BR-101 Norte</strong>
-                <span>Passando por Campos dos Goytacazes e Marataízes.</span>
+                <strong><span data-contador="440">440</span> <span data-i18n="location.route3Dist">km via BR-101 Norte</span></strong>
+                <span data-i18n="location.route3Desc">Passando por Campos dos Goytacazes e Marataízes.</span>
               </div>
             </div>
           </div>
 
-          <a href="https://www.google.com/maps/search/?api=1&query=Rua+Adir,+R.+Ady+Fernandes+Mignone,+Anchieta+-+ES,+29230-000" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Traçar Rota no Google Maps</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Rua+Adir,+R.+Ady+Fernandes+Mignone,+Anchieta+-+ES,+29230-000" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">
+            <i class="fa-solid fa-map-location-dot" style="margin-right: 6px;" aria-hidden="true"></i>
+            <span data-i18n="location.btnRoute">Traçar Rota no Google Maps</span>
+          </a>
         </div>
 
         <div class="map-wrapper" data-reveal="zoom">
           <iframe 
             title="Mapa de Localização - Recanto da Pedra em Anchieta ES"
+            data-i18n-attr="title:location.iframeTitle"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14917.43265819777!2d-40.6480112!3d-20.8247926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb9dae076646549%3A0x6b4cf88ee27e5a6a!2sIriri%2C%20Anchieta%20-%20ES!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
             width="100%" 
             height="100%" 
@@ -729,69 +915,91 @@
   <!-- ==================== BANNER FINAL CTA ==================== -->
   <section class="cta-banner" id="reservar">
     <div class="container cta-banner-content" data-reveal="zoom">
-      <span class="hero-tag">Sua estadia memorável</span>
-      <h2>Pronto para viver o ritmo do mar e da pedra?</h2>
-      <p>
+      <span class="hero-tag" data-i18n="banner.tag">Sua estadia memorável</span>
+      <h2 data-i18n="banner.title">Pronto para viver o ritmo do mar e da pedra?</h2>
+      <p data-i18n="banner.desc">
         Garanta as melhores datas diretamente conosco com atendimento personalizado, tarifas exclusivas e as melhores suítes do litoral capixaba.
       </p>
       <div class="cta-buttons">
-        <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20reserva%20no%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Reservar pelo WhatsApp</a>
-        <a href="tel:+552835341599" class="btn btn-outline-white">Ligar: (28) 3534-1599</a>
+        <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20reserva%20no%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="btn btn-gold js-wpp-booking">
+          <i class="fa-brands fa-whatsapp" style="margin-right: 6px;" aria-hidden="true"></i>
+          <span data-i18n="banner.btnWpp">Reservar pelo WhatsApp</span>
+        </a>
+        <a href="tel:+552835341599" class="btn btn-outline-white">
+          <i class="fa-solid fa-phone" style="margin-right: 6px;" aria-hidden="true"></i>
+          <span data-i18n="banner.btnCall">Ligar: (28) 3534-1599</span>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- ==================== RODAPÉ ==================== -->
-  <footer class="site-footer">
-    <div class="container footer-top">
-      <div class="footer-brand">
-        <div class="brand-title">Recanto da Pedra</div>
-        <div class="brand-subtitle">Pousada & Gastronomia</div>
-        <p class="footer-bio">
+  <footer class="site-footer" data-reveal="up">
+    <div class="container footer-top" data-reveal-group>
+      <div class="footer-brand" data-reveal="up">
+        <div class="brand-title" data-i18n="brand.title">Recanto da Pedra</div>
+        <div class="brand-subtitle" data-i18n="brand.subtitle">Pousada &amp; Gastronomia</div>
+        <p class="footer-bio" data-i18n="footer.bio">
           Um recanto autoral em Iriri, Espírito Santo, onde a imensidão do mar se une à solidez das rochas e à tradição dos sabores capixabas.
         </p>
-      </div>
-
-      <div>
-        <h4 class="footer-col-title">Navegação</h4>
-        <div class="footer-links">
-          <a href="#o-refugio">O Refúgio</a>
-          <a href="#acomodacoes">Suítes & Bangalôs</a>
-          <a href="#gastronomia">Restaurante Capixaba</a>
-          <a href="#experiencias">Experiências</a>
-          <a href="#informacoes">Informações & Horários</a>
-          <a href="#localizacao">Como Chegar</a>
+        
+        <!-- Redes Sociais no Rodapé -->
+        <div class="footer-socials" role="navigation" aria-label="Redes Sociais">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram do Recanto da Pedra">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook do Recanto da Pedra">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+          <a href="https://tripadvisor.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="TripAdvisor do Recanto da Pedra">
+            <i class="fa-brands fa-tripadvisor" aria-hidden="true"></i>
+          </a>
+          <a href="https://wa.me/5528999750058" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp Oficial">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
 
-      <div>
-        <h4 class="footer-col-title">Horários Oficiais</h4>
+      <div data-reveal="up">
+        <h4 class="footer-col-title" data-i18n="footer.navTitle">Navegação</h4>
+        <div class="footer-links">
+          <a href="#o-refugio" data-i18n="nav.refugio">O Refúgio</a>
+          <a href="#acomodacoes" data-i18n="nav.acomodacoes">Suítes &amp; Bangalôs</a>
+          <a href="#gastronomia" data-i18n="nav.gastronomia">Restaurante Capixaba</a>
+          <a href="#experiencias" data-i18n="nav.experiencias">Experiências</a>
+          <a href="#informacoes" data-i18n="nav.informacoes">Informações &amp; Horários</a>
+          <a href="#localizacao" data-i18n="nav.localizacao">Como Chegar</a>
+        </div>
+      </div>
+
+      <div data-reveal="up">
+        <h4 class="footer-col-title" data-i18n="footer.hoursTitle">Horários Oficiais</h4>
         <div class="footer-links" style="font-size: 0.84rem; line-height: 1.6;">
-          <span>Terça a Sábado: 11:00 – 23:00</span>
-          <span>Domingo: 11:00 – 16:00</span>
-          <span>Segunda-feira: 11:00 – 23:00</span>
+          <span data-i18n="footer.hoursTueSat">Terça a Sábado: 11:00 – 23:00</span>
+          <span data-i18n="footer.hoursSun">Domingo: 11:00 – 16:00</span>
+          <span data-i18n="footer.hoursMon">Segunda-feira: 11:00 – 23:00</span>
           <span style="color: var(--gold-glow); font-weight: 600; margin-top: 4px;" id="footerStatusText">● Aberto agora</span>
         </div>
       </div>
 
-      <div>
-        <h4 class="footer-col-title">Contato & Endereço</h4>
+      <div data-reveal="up">
+        <h4 class="footer-col-title" data-i18n="footer.contactTitle">Contato &amp; Endereço</h4>
         <div class="footer-contact-list">
           <div class="footer-contact-item">
-            <span>📍</span>
-            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Adir,+R.+Ady+Fernandes+Mignone,+Anchieta+-+ES,+29230-000" target="_blank" rel="noopener noreferrer" style="color: inherit;" title="Abrir localização no Google Maps">
+            <i class="fa-solid fa-location-dot" style="color: var(--gold-sand);" aria-hidden="true"></i>
+            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Adir,+R.+Ady Fernandes+Mignone,+Anchieta+-+ES,+29230-000" target="_blank" rel="noopener noreferrer" style="color: inherit;" title="Abrir localização no Google Maps" data-i18n-attr="title:location.addressTitle">
               Rua Adir, R. Ady Fernandes Mignone,<br>Anchieta – ES, 29230-000
             </a>
           </div>
           <div class="footer-contact-item">
-            <span>☎</span>
-            <a href="tel:+552835341599" style="color: inherit;" title="Ligar para o telefone comercial">
+            <i class="fa-solid fa-phone" style="color: var(--gold-sand);" aria-hidden="true"></i>
+            <a href="tel:+552835341599" style="color: inherit;" title="Ligar para o telefone comercial" data-i18n-attr="title:info.phoneTitle">
               (28) 3534-1599
             </a>
           </div>
           <div class="footer-contact-item">
-            <span>💬</span>
-            <a href="https://wa.me/5528999750058" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;" title="Conversar no WhatsApp">
+            <i class="fa-brands fa-whatsapp" style="color: #25D366;" aria-hidden="true"></i>
+            <a href="https://wa.me/5528999750058" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;" title="Conversar no WhatsApp" class="js-wpp-info" data-i18n-attr="title:info.wppTitle">
               (28) 99975-0058
             </a>
           </div>
@@ -799,73 +1007,80 @@
       </div>
     </div>
 
-    <div class="container footer-bottom">
-      <p>© 2026 Recanto da Pedra — Todos os direitos reservados. Projeto autoral.</p>
-      <p>Rua Adir, R. Ady Fernandes Mignone • Anchieta – ES</p>
+    <div class="container footer-bottom" data-reveal="up">
+      <p data-i18n="footer.copyright">© 2026 Recanto da Pedra — Todos os direitos reservados. Projeto autoral.</p>
+      <p data-i18n="footer.addressLine">Rua Adir, R. Ady Fernandes Mignone • Anchieta – ES</p>
     </div>
   </footer>
 
   <!-- ==================== WHATSAPP FLUTUANTE ==================== -->
-  <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="floating-whatsapp" aria-label="Fale conosco no WhatsApp">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 18.08c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.83-3.05-.2-.32a8.214 8.214 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.67 8.26-8.19 8.26zm4.52-6.18c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/>
-    </svg>
+  <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="floating-whatsapp js-wpp-info" aria-label="Fale conosco no WhatsApp" data-i18n-attr="aria-label:floatingWpp.ariaLabel">
+    <i class="fa-brands fa-whatsapp" style="font-size: 32px;" aria-hidden="true"></i>
   </a>
+
+  <!-- ==================== BOTÃO VOLTAR AO TOPO ==================== -->
+  <button class="back-to-top" id="backToTopBtn" type="button" aria-label="Voltar ao topo da página" title="Voltar ao topo">
+    <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+  </button>
 
   <!-- ==================== MODAL DE RESERVA ==================== -->
   <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-card">
-      <button class="modal-close" aria-label="Fechar janela">✕</button>
-      <h3 class="modal-title" id="modalTitle">Sua Estadia no Recanto</h3>
-      <p class="modal-subtitle">Preencha os dados abaixo para receber os valores e disponibilidade diretamente pelo WhatsApp.</p>
+      <button class="modal-close" aria-label="Fechar janela" data-i18n-attr="aria-label:modal.closeAria">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <h3 class="modal-title" id="modalTitle" data-i18n="modal.title">Sua Estadia no Recanto</h3>
+      <p class="modal-subtitle" data-i18n="modal.subtitle">Preencha os dados abaixo para receber os valores e disponibilidade diretamente pelo WhatsApp.</p>
 
       <form id="modalBookingForm">
         <div class="form-group">
-          <label class="form-label" for="clientName">Seu Nome Completo</label>
-          <input type="text" id="clientName" name="clientName" class="form-input" placeholder="Ex: Ana Clara Martins" required>
+          <label class="form-label" for="clientName" data-i18n="modal.nameLabel">Seu Nome Completo</label>
+          <input type="text" id="clientName" name="clientName" class="form-input" placeholder="Ex: Ana Clara Martins" data-i18n-attr="placeholder:modal.namePlaceholder" required>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="modalCheckin">Check-in</label>
+            <label class="form-label" for="modalCheckin" data-i18n="modal.checkinLabel">Check-in</label>
             <input type="date" id="modalCheckin" name="checkin" class="form-input" required>
           </div>
           <div class="form-group">
-            <label class="form-label" for="modalCheckout">Check-out</label>
+            <label class="form-label" for="modalCheckout" data-i18n="modal.checkoutLabel">Check-out</label>
             <input type="date" id="modalCheckout" name="checkout" class="form-input" required>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="modalGuests">Hóspedes</label>
+            <label class="form-label" for="modalGuests" data-i18n="modal.guestsLabel">Hóspedes</label>
             <select id="modalGuests" name="guests" class="form-input">
-              <option value="Casal (2 pessoas)">Casal (2 pessoas)</option>
-              <option value="1 pessoa">1 pessoa</option>
-              <option value="3 pessoas">3 pessoas</option>
-              <option value="Família (4 ou mais)">Família (4 ou mais)</option>
+              <option value="couple" selected data-i18n="modal.guestsOptions.couple">Casal (2 pessoas)</option>
+              <option value="single" data-i18n="modal.guestsOptions.single">1 pessoa</option>
+              <option value="triple" data-i18n="modal.guestsOptions.triple">3 pessoas</option>
+              <option value="family" data-i18n="modal.guestsOptions.family">Família (4 ou mais)</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="modalSuiteSelect">Acomodação</label>
+            <label class="form-label" for="modalSuiteSelect" data-i18n="modal.suiteLabel">Acomodação</label>
             <select id="modalSuiteSelect" name="suite" class="form-input">
-              <option value="Qualquer Suíte">Qualquer Suíte</option>
-              <option value="Suíte Costa Azul">Suíte Costa Azul</option>
-              <option value="Suíte Mirante da Pedra">Suíte Mirante da Pedra</option>
-              <option value="Bangalô das Enseadas">Bangalô das Enseadas</option>
+              <option value="any" selected data-i18n="modal.suiteOptions.any">Qualquer Suíte</option>
+              <option value="costaAzul" data-i18n="modal.suiteOptions.costaAzul">Suíte Costa Azul</option>
+              <option value="mirante" data-i18n="modal.suiteOptions.mirante">Suíte Mirante da Pedra</option>
+              <option value="bangalo" data-i18n="modal.suiteOptions.bangalo">Bangalô das Enseadas</option>
             </select>
           </div>
         </div>
 
         <button type="submit" class="btn btn-whatsapp" style="width: 100%; margin-top: 1rem;">
-          Consultar via WhatsApp
+          <i class="fa-brands fa-whatsapp" style="margin-right: 6px;" aria-hidden="true"></i>
+          <span data-i18n="modal.submitBtn">Consultar via WhatsApp</span>
         </button>
       </form>
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="js/app.js?v=2.2"></script>
+  <!-- Scripts: i18n primeiro, seguido pelas interações do site -->
+  <script src="js/i18n.js?v=3.2"></script>
+  <script src="js/app.js?v=3.2"></script>
 </body>
 </html>

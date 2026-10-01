@@ -1,0 +1,327 @@
+{
+  "meta": {
+    "title": "Recanto da Pedra — Seaside Boutique Inn & Capixaba Gastronomy in Iriri, ES",
+    "description": "A singular oceanfront sanctuary on Costa Azul in Iriri, Espírito Santo. Authentic harmony with the sea, granite boulders, and fine capixaba cuisine. Dine, unwind, and contemplate."
+  },
+  "seo": {
+    "ogTitle": "Recanto da Pedra — Seaside Boutique Inn & Capixaba Cuisine",
+    "ogDescription": "Experience an exclusive seaside getaway perched upon the granite cliffs of Costa Azul in Iriri, Brazil. Artisanal breakfast included, oceanfront suites, and authentic regional dining.",
+    "ogLocale": "en_US",
+    "twitterTitle": "Recanto da Pedra — Boutique Inn & Restaurant in Iriri, ES",
+    "twitterDescription": "Oceanfront luxury retreat with authentic capixaba cuisine in Costa Azul, Anchieta, Espírito Santo, Brazil."
+  },
+  "schema": {
+    "hotelName": "Recanto da Pedra — Seaside Boutique Inn & Gastronomy",
+    "hotelDescription": "Charming oceanfront boutique inn on Costa Azul in Iriri, Anchieta, Espírito Santo, Brazil. Exclusive suites featuring panoramic ocean views and complimentary traditional Capixaba breakfast.",
+    "restaurantName": "Recanto da Pedra Restaurant",
+    "restaurantDescription": "Seaside restaurant specializing in authentic clay-pot moqueca capixaba, prime wild seafood, and signature coastal mixology in Iriri, ES, Brazil.",
+    "cuisine": ["Capixaba Seafood", "Fresh Atlantic Seafood", "Contemporary Brazilian"],
+    "amenities": [
+      "Traditional Capixaba breakfast included",
+      "Oceanfront setting",
+      "Panoramic sea view suites",
+      "High-speed Wi-Fi",
+      "Split climate control air conditioning",
+      "On-site gourmet restaurant",
+      "Ocean-view soaking tubs",
+      "Private hardwood ocean deck"
+    ]
+  },
+  "a11y": {
+    "langAnnouncement": "Language changed to English (US)"
+  },
+  "brand": {
+    "title": "Recanto da Pedra",
+    "subtitle": "Boutique Inn & Gastronomy • Iriri, ES",
+    "homeAria": "Recanto da Pedra - Home Page"
+  },
+  "nav": {
+    "ariaLabel": "Main Navigation",
+    "refugio": "The Haven",
+    "acomodacoes": "Accommodations",
+    "gastronomia": "Capixaba Cuisine",
+    "experiencias": "Experiences",
+    "informacoes": "Info & Hours",
+    "localizacao": "Directions",
+    "appearance": "Appearance",
+    "lightMode": "☀️ Light Mode",
+    "darkMode": "🌙 Dark Mode",
+    "reserve": "Book Stay",
+    "themeAria": "Toggle dark and light mode",
+    "themeBtnAria": "Toggle light and dark theme",
+    "themeBtnTitle": "Toggle dark / light mode",
+    "mobileToggleAria": "Open navigation menu"
+  },
+  "lang": {
+    "aria": "Select language",
+    "label": "Language",
+    "pt": "PT",
+    "en": "EN",
+    "es": "ES",
+    "ptTitle": "Português (Brasil)",
+    "enTitle": "English (US)",
+    "esTitle": "Español"
+  },
+  "hero": {
+    "tag": "Costa Azul • Espírito Santo",
+    "titleHtml": "Where the sea touches stone<br>and time <em>slows down</em>.",
+    "manifesto": "A unique coastal sanctuary in Iriri where guests savor authentic capixaba gastronomy, unwind to the rhythm of the tides, and contemplate the boundless ocean horizon.",
+    "btnAvailability": "Check Availability",
+    "btnSuites": "Explore Suites",
+    "directRate": "Official Direct Rate • Traditional Capixaba Breakfast Included",
+    "imgAlt": "Granite coastal rocks and crystal-blue sea in Iriri"
+  },
+  "booking": {
+    "nightsPrefix": "Stay",
+    "connectorTitle": "Length of stay",
+    "checkinLabel": "Arrival (Check-in)",
+    "checkoutLabel": "Departure (Check-out)",
+    "guestsLabel": "Guests",
+    "suiteLabel": "Accommodation",
+    "quoteBtnMain": "GET A QUOTE",
+    "quoteBtnSub": "Direct via WhatsApp",
+    "featureNoFees": "No intermediaries or hidden fees",
+    "featureInstant": "Immediate assistance",
+    "featureOceanfront": "Oceanfront in Iriri",
+    "nightSingle": "night",
+    "nightPlural": "nights",
+    "nightSingleCap": "Night",
+    "nightPluralCap": "Nights",
+    "stayWord": "Stay",
+    "toWord": "to",
+    "guestsOptions": {
+      "couple": "2 Guests (Couple / Double)",
+      "single": "1 Guest (Single)",
+      "triple": "3 Guests (Triple)",
+      "family": "Family (4 or more)"
+    },
+    "guestsSubtexts": {
+      "couple": "1 King Bed • Ideal for couples",
+      "single": "1 Private suite • Solo comfort",
+      "triple": "1 Spacious suite • Extra bed",
+      "family": "Family accommodation • Utmost comfort"
+    },
+    "suiteOptions": {
+      "all": "All Accommodations",
+      "costaAzul": "Costa Azul Suite (Oceanfront)",
+      "mirante": "Mirante da Pedra Suite (Panoramic)",
+      "bangalo": "Enseadas Bungalow (Exclusive)"
+    },
+    "suiteSubtexts": {
+      "all": "Best available daily rate",
+      "costaAzul": "From R$ 720 / night",
+      "mirante": "From R$ 940 / night",
+      "bangalo": "From R$ 1,180 / night"
+    }
+  },
+  "concept": {
+    "eyebrow": "Signature Concept",
+    "title": "Dine, unwind, and contemplate the sea of Iriri.",
+    "p1": "Recanto da Pedra was born from the organic harmony between Iriri’s mineral cliffs and the pristine waters of Costa Azul. We are more than an inn: we are an oceanfront haven with a capixaba soul that invites you to slow down, breathe the ocean breeze, and cherish life’s most genuine pleasures.",
+    "p2": "Architecture integrated into the rocky terrain, fine hardwood ocean decks, coastal flora, and a kitchen that honors the artisanal clay pot traditions of Goiabeiras with fresh fish and seafood sourced daily from our local coastline.",
+    "pillar1Title": "Dine",
+    "pillar1Desc": "Rooted and contemporary capixaba cuisine crafted with fresh local ingredients overlooking the ocean.",
+    "pillar2Title": "Unwind",
+    "pillar2Desc": "Breezy suites, pure cotton linens, and the soothing murmur of breaking waves.",
+    "pillar3Title": "Contemplate",
+    "pillar3Desc": "Golden sunrises over the granite cliffs and the deep blue expanse of Iriri bay.",
+    "badgeHtml": "<strong>Privacy & Serenity:</strong> Only a select collection of suites to ensure absolute peace.",
+    "imgAlt": "Relaxing seaside ambiance"
+  },
+  "suites": {
+    "eyebrow": "Charming Accommodations",
+    "title": "Havens facing the azure horizon",
+    "description": "Each space is crafted to celebrate coastal sunlight, organic textures, natural woods, and an unobstructed view of Iriri's granite boulders and sea.",
+    "pricePrefix": "Rates starting from",
+    "perNight": "/ night",
+    "btnReserve": "Book Now",
+    "suite1": {
+      "name": "Suíte Costa Azul",
+      "tag": "Oceanfront",
+      "desc": "Expansive private oceanfront balcony, King Size bed, horizon-view walk-in shower, and 400-thread-count linens.",
+      "spec1": "48 m² (516 sq ft)",
+      "spec2": "Up to 2 guests",
+      "spec3": "AC & Espresso Machine",
+      "price": "R$ 720",
+      "imgAlt": "Suíte Costa Azul"
+    },
+    "suite2": {
+      "name": "Suíte Mirante da Pedra",
+      "tag": "Panoramic View",
+      "desc": "Perched directly above the granite coastline with floor-to-ceiling glass. Savor breathtaking sunsets straight from your soaking tub.",
+      "spec1": "56 m² (602 sq ft)",
+      "spec2": "Up to 3 guests",
+      "spec3": "Deep Soaking Tub",
+      "price": "R$ 940",
+      "imgAlt": "Suíte Mirante da Pedra"
+    },
+    "suite3": {
+      "name": "Bangalô das Enseadas",
+      "tag": "Utmost Exclusivity",
+      "desc": "Freestanding bungalow with private timber deck, sun terrace with loungers, and secluded private access to the ocean rocks.",
+      "spec1": "68 m² (731 sq ft)",
+      "spec2": "Up to 4 guests",
+      "spec3": "Deck & Ocean Lounge",
+      "price": "R$ 1,180",
+      "imgAlt": "Bangalô das Enseadas"
+    }
+  },
+  "gastronomy": {
+    "eyebrow": "Gastronomy & Heritage",
+    "title": "Flavors born from the capixaba sea and soil",
+    "quote": "“Moqueca is capixaba; everything else is just fish stew.” Here at Recanto da Pedra, this Brazilian tradition comes to life in handmade clay pots, pure annatto oil, fresh cilantro, and noble fish landed daily in Iriri and Anchieta.",
+    "dish1Title": "Moqueca Capixaba of Grouper & Jumbo Shrimp",
+    "dish1Desc": "Slow-simmered in artisanal clay cookware, served with velvety fish broth reduction (pirão) and fresh coconut rice.",
+    "dish2Title": "Traditional Torta Capixaba & Seafood",
+    "dish2Desc": "Historic coastal recipe blending shredded crab, Atlantic salt cod, wild prawns, and fresh heart of palm.",
+    "dish3Title": "Signature Costa Azul Mixology",
+    "dish3Desc": "Refreshing craft cocktails infused with coastal fruits, artisanal capixaba cachaça, and subtle spices.",
+    "btnReserveTable": "Reserve a Table at the Restaurant",
+    "captionMoqueca": "Authentic Capixaba Moqueca",
+    "captionHall": "Dining room with coastal rock views",
+    "captionDrinks": "Sunset cocktails",
+    "imgAltMoqueca": "Traditional Capixaba Moqueca in artisanal clay pot",
+    "imgAltHall": "Restaurant with panoramic ocean views",
+    "imgAltDrinks": "Refreshing oceanfront craft cocktails"
+  },
+  "experiences": {
+    "eyebrow": "Unforgettable Moments",
+    "title": "The Charm of Costa Azul",
+    "description": "Iriri is fondly celebrated as the most charming beach destination in Espírito Santo. From calm, warm coves to wind-sculpted granite headlands, embrace every nuance.",
+    "exp1Title": "Natural Tide Pools",
+    "exp1Desc": "Peaceful swimming and snorkeling among crystal reefs and boulders right in front of Recanto.",
+    "exp1ImgAlt": "Natural tide pools on the granite shore of Iriri",
+    "exp2Title": "Breezy Gourmet Breakfast",
+    "exp2Desc": "Artisanal breads, homemade cakes, regional farm cheeses, and fresh tropical fruit served oceanfront.",
+    "exp2ImgAlt": "Artisanal outdoor breakfast overlooking the ocean",
+    "exp3Title": "Golden Sunset",
+    "exp3Desc": "The daily evening spectacle as golden twilight tones illuminate Iriri’s granite formations.",
+    "exp3ImgAlt": "Sunset over the rocky coastline",
+    "exp4Title": "Boat Excursions",
+    "exp4Desc": "Cruise along the serene coves of Areia Preta, Costa Azul, Namorados, and Santa Helena.",
+    "exp4ImgAlt": "Scenic boat tours along Anchieta coves"
+  },
+  "reviews": {
+    "eyebrow": "Guest Memories",
+    "title": "Words from Our Guests",
+    "rev1Quote": "“Waking up to waves breaking against the rocks and having an impeccable breakfast overlooking Costa Azul is priceless. The moqueca served in their restaurant is easily one of the finest in Espírito Santo.”",
+    "rev1Author": "Mariana Silveira",
+    "rev1City": "Belo Horizonte, MG",
+    "rev2Quote": "“The attention to aesthetics and acoustic tranquility is outstanding. An inn that truly respects nature while delivering boutique comfort of the highest order in Brazil.”",
+    "rev2Author": "Rodrigo Furtado",
+    "rev2City": "Vitória, ES",
+    "rev3Quote": "“A perfect retreat for couples looking to genuinely disconnect. Sharing a fine wine on the ocean deck as dusk settles over the rocks is unforgettable.”",
+    "rev3Author": "Carla & Paulo Mendes",
+    "rev3City": "Rio de Janeiro, RJ"
+  },
+  "info": {
+    "eyebrow": "Official Information",
+    "title": "Location, Operating Hours & Service",
+    "description": "Plan your visit to our restaurant and inn on Anchieta’s Costa Azul. Our doors are warmly open to welcome you right before the ocean.",
+    "hoursTitle": "Operating Hours",
+    "statusOpen": "Open now",
+    "statusClosed": "Closed now",
+    "todayPrefix": "Today:",
+    "nextOpening": "Next opening: 11:00 AM",
+    "todayTag": "Today",
+    "days": {
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "monday": "Monday"
+    },
+    "contactsTitle": "Customer Care",
+    "phoneLabel": "☎ Main Phone Line",
+    "phoneBtn": "CALL",
+    "phoneAria": "Call landline phone",
+    "phoneTitle": "Call commercial line",
+    "wppLabel": "💬 Official WhatsApp",
+    "wppBtn": "WHATSAPP",
+    "wppAria": "Send message on WhatsApp",
+    "wppTitle": "Chat on WhatsApp"
+  },
+  "location": {
+    "eyebrow": "📍 Official Location",
+    "title": "How to Find Recanto",
+    "addressTitle": "Click to open on Google Maps",
+    "addressStreet": "Rua Adir, R. Ady Fernandes Mignone",
+    "addressCity": "Anchieta – ES, 29230-000, Brazil",
+    "addressHint": "Tap to open navigation in Google Maps",
+    "route1Badge": "Vitória / ES",
+    "route1Dist": "km (~57 mi) via Rodovia do Sol (ES-060)",
+    "route1Desc": "Approx. 1h20 min scenic coastal highway drive through Guarapari.",
+    "route2Badge": "Belo Horizonte / MG",
+    "route2Dist": "km (~286 mi) via BR-262 and BR-101",
+    "route2Desc": "Direct highway access to Iriri seaside with paved roads all the way.",
+    "route3Badge": "Rio de Janeiro / RJ",
+    "route3Dist": "km (~273 mi) via BR-101 North",
+    "route3Desc": "Passing through Campos dos Goytacazes and Marataízes.",
+    "btnRoute": "Get Directions on Google Maps",
+    "iframeTitle": "Location Map - Recanto da Pedra in Anchieta ES"
+  },
+  "banner": {
+    "tag": "Your memorable getaway",
+    "title": "Ready to experience the rhythm of the sea and stone?",
+    "desc": "Secure your dates directly with us for bespoke guest care, exclusive direct rates, and the most charming suites on the capixaba coast.",
+    "btnWpp": "Book via WhatsApp",
+    "btnCall": "Call: (28) 3534-1599"
+  },
+  "footer": {
+    "bio": "A signature coastal retreat in Iriri, Espírito Santo, where the ocean's vastness unites with solid granite cliffs and genuine capixaba culinary heritage.",
+    "navTitle": "Navigation",
+    "hoursTitle": "Official Hours",
+    "hoursTueSat": "Tuesday to Saturday: 11:00 AM – 11:00 PM",
+    "hoursSun": "Sunday: 11:00 AM – 4:00 PM",
+    "hoursMon": "Monday: 11:00 AM – 11:00 PM",
+    "statusOpen": "● Open now",
+    "statusClosed": "○ Closed now",
+    "contactTitle": "Contact & Address",
+    "copyright": "© 2026 Recanto da Pedra — All rights reserved. Signature project.",
+    "addressLine": "Rua Adir, R. Ady Fernandes Mignone • Anchieta – ES"
+  },
+  "floatingWpp": {
+    "ariaLabel": "Chat with us on WhatsApp"
+  },
+  "modal": {
+    "closeAria": "Close window",
+    "title": "Your Stay at Recanto",
+    "subtitle": "Provide your details below to receive personalized rates and real-time availability directly via WhatsApp.",
+    "nameLabel": "Your Full Name",
+    "namePlaceholder": "e.g., Jennifer Lawrence",
+    "checkinLabel": "Check-in",
+    "checkoutLabel": "Check-out",
+    "guestsLabel": "Guests",
+    "suiteLabel": "Accommodation",
+    "submitBtn": "Inquire via WhatsApp",
+    "guestsOptions": {
+      "couple": "Couple (2 guests)",
+      "single": "1 guest",
+      "triple": "3 guests",
+      "family": "Family (4 or more)"
+    },
+    "suiteOptions": {
+      "any": "Any Suite",
+      "costaAzul": "Suíte Costa Azul",
+      "mirante": "Suíte Mirante da Pedra",
+      "bangalo": "Bangalô das Enseadas"
+    }
+  },
+  "whatsappMessages": {
+    "defaultInfo": "Hello, I would like more information about Recanto da Pedra",
+    "restaurantTable": "Hello, I would like to reserve a table at Recanto da Pedra Restaurant",
+    "bookingHeader": "🌊 *BOOKING INQUIRY — RECANTO DA PEDRA (IRIRI/ES, BRAZIL)*",
+    "guestLine": "• *Guest:* {name}",
+    "checkinLine": "• *Check-in:* {date} ({weekday})",
+    "checkoutLine": "• *Check-out:* {date} ({weekday})",
+    "durationLine": "• *Duration:* {count} {word}",
+    "guestsLine": "• *Guests:* {guests}",
+    "suiteLine": "• *Accommodation:* {suite}",
+    "sourceLine": "• *Source:* Official Website Direct Rate (Capixaba Breakfast Included)",
+    "footerPrompt": "I would like to check availability and confirm rates for this period.",
+    "dailySingle": "night",
+    "dailyPlural": "nights"
+  }
+}

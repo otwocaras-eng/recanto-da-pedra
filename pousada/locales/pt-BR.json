@@ -1,0 +1,327 @@
+{
+  "meta": {
+    "title": "Recanto da Pedra — Pousada & Gastronomia em Iriri, ES",
+    "description": "Um refúgio singular na Costa Azul de Iriri, Espírito Santo. Conexão autêntica com o mar, o costão de pedras e a alta gastronomia capixaba. Comer, descansar e contemplar."
+  },
+  "seo": {
+    "ogTitle": "Recanto da Pedra — Pousada de Charme & Gastronomia Capixaba",
+    "ogDescription": "Viva a experiência única de se hospedar sobre as rochas da Costa Azul de Iriri, ES. Café da manhã artesanal incluso, suítes com vista mar e culinária autêntica.",
+    "ogLocale": "pt_BR",
+    "twitterTitle": "Recanto da Pedra — Pousada & Restaurante em Iriri, ES",
+    "twitterDescription": "Refúgio exclusivo de frente para o mar com a legítima gastronomia capixaba na Costa Azul de Anchieta, Espírito Santo."
+  },
+  "schema": {
+    "hotelName": "Recanto da Pedra — Pousada & Gastronomia",
+    "hotelDescription": "Pousada de charme frente ao mar na Costa Azul de Iriri, Anchieta, Espírito Santo. Acomodações exclusivas com vista panorâmica do oceano e café da manhã capixaba incluso.",
+    "restaurantName": "Restaurante Recanto da Pedra",
+    "restaurantDescription": "Restaurante especializado em autêntica moqueca capixaba em panela de barro artesanal, frutos do mar nobres e coquetelaria autoral em Iriri, ES.",
+    "cuisine": ["Culinária Capixaba", "Frutos do Mar", "Gastronomia Brasileira Contemporânea"],
+    "amenities": [
+      "Café da manhã capixaba incluso",
+      "Frente para o mar",
+      "Suítes com vista panorâmica",
+      "Wi-Fi de alta velocidade",
+      "Ar-condicionado split",
+      "Restaurante próprio com gastronomia capixaba",
+      "Banheira de imersão com vista oceânica",
+      "Deque privativo de madeira sobre o costão"
+    ]
+  },
+  "a11y": {
+    "langAnnouncement": "Idioma alterado para Português do Brasil"
+  },
+  "brand": {
+    "title": "Recanto da Pedra",
+    "subtitle": "Pousada & Gastronomia • Iriri, ES",
+    "homeAria": "Recanto da Pedra - Página Inicial"
+  },
+  "nav": {
+    "ariaLabel": "Navegação Principal",
+    "refugio": "O Refúgio",
+    "acomodacoes": "Acomodações",
+    "gastronomia": "Gastronomia Capixaba",
+    "experiencias": "Experiências",
+    "informacoes": "Informações & Horários",
+    "localizacao": "Como Chegar",
+    "appearance": "Aparência",
+    "lightMode": "☀️ Modo Claro",
+    "darkMode": "🌙 Modo Escuro",
+    "reserve": "Reservar Estadia",
+    "themeAria": "Alternar modo escuro e claro",
+    "themeBtnAria": "Alternar tema claro e escuro",
+    "themeBtnTitle": "Alternar modo escuro / claro",
+    "mobileToggleAria": "Abrir menu de navegação"
+  },
+  "lang": {
+    "aria": "Selecionar idioma",
+    "label": "Idioma",
+    "pt": "PT",
+    "en": "EN",
+    "es": "ES",
+    "ptTitle": "Português (Brasil)",
+    "enTitle": "English (US)",
+    "esTitle": "Español"
+  },
+  "hero": {
+    "tag": "Costa Azul • Espírito Santo",
+    "titleHtml": "Onde o mar toca a pedra<br>e o tempo <em>desacelera</em>.",
+    "manifesto": "Um lugar especial de Iriri onde o visitante pode comer a autêntica gastronomia capixaba, descansar com o som das marés e contemplar o horizonte infinito.",
+    "btnAvailability": "Consultar Disponibilidade",
+    "btnSuites": "Conhecer as Suítes",
+    "directRate": "Tarifa Oficial Direta • Café da Manhã Capixaba Incluso",
+    "imgAlt": "Costão de pedras e mar azul cristalino em Iriri"
+  },
+  "booking": {
+    "nightsPrefix": "de Estadia",
+    "connectorTitle": "Duração da estadia",
+    "checkinLabel": "Entrada (Check-in)",
+    "checkoutLabel": "Saída (Check-out)",
+    "guestsLabel": "Hóspedes",
+    "suiteLabel": "Acomodação",
+    "quoteBtnMain": "COTAR ESTADIA",
+    "quoteBtnSub": "Direto pelo WhatsApp",
+    "featureNoFees": "Sem intermediários ou taxas ocultas",
+    "featureInstant": "Atendimento imediato",
+    "featureOceanfront": "Frente para o mar de Iriri",
+    "nightSingle": "noite",
+    "nightPlural": "noites",
+    "nightSingleCap": "Noite",
+    "nightPluralCap": "Noites",
+    "stayWord": "de Estadia",
+    "toWord": "a",
+    "guestsOptions": {
+      "couple": "2 Hóspedes (Casal / Duplo)",
+      "single": "1 Hóspede (Individual)",
+      "triple": "3 Hóspedes (Triplo)",
+      "family": "Família (4 ou mais)"
+    },
+    "guestsSubtexts": {
+      "couple": "1 Cama King • Perfeito para casal",
+      "single": "1 Suíte privativa • Conforto individual",
+      "triple": "1 Suíte espaçosa • Cama extra",
+      "family": "Acomodação família • Máxima comodidade"
+    },
+    "suiteOptions": {
+      "all": "Todas as Acomodações",
+      "costaAzul": "Suíte Costa Azul (Frente Mar)",
+      "mirante": "Suíte Mirante da Pedra (Panorâmica)",
+      "bangalo": "Bangalô das Enseadas (Exclusivo)"
+    },
+    "suiteSubtexts": {
+      "all": "Melhor diária disponível",
+      "costaAzul": "A partir de R$ 720 / noite",
+      "mirante": "A partir de R$ 940 / noite",
+      "bangalo": "A partir de R$ 1.180 / noite"
+    }
+  },
+  "concept": {
+    "eyebrow": "O Conceito Autoral",
+    "title": "Comer, descansar e contemplar o mar de Iriri.",
+    "p1": "O Recanto da Pedra nasceu do encontro espontâneo entre as falésias minerais de Iriri e as águas límpidas da Costa Azul. Não somos apenas uma pousada: somos um recanto com alma capixaba que convida você a desacelerar o ritmo, respirar a maresia fresca e desfrutar do que a vida tem de mais genuíno.",
+    "p2": "Arquitetura integrada ao relevo rochoso, deque em madeiras nobres sobre as pedras, jardins litorâneos e uma cozinha que honra as tradições da autêntica panela de barro de Goiabeiras com peixes e mariscos frescos da nossa própria costa.",
+    "pillar1Title": "Comer",
+    "pillar1Desc": "Culinária capixaba raiz e contemporânea, com ingredientes frescos e vista para o oceano.",
+    "pillar2Title": "Descansar",
+    "pillar2Desc": "Suítes arejadas, roupas de cama em puro algodão e o murmúrio constante das ondas.",
+    "pillar3Title": "Contemplar",
+    "pillar3Desc": "O nascer do sol dourado no costão de pedra e o azul profundo da enseada de Iriri.",
+    "badgeHtml": "<strong>Privacidade & Serenidade:</strong> Apenas poucas suítes exclusivas para garantir tranquilidade absoluta.",
+    "imgAlt": "Ambiente relaxante à beira-mar"
+  },
+  "suites": {
+    "eyebrow": "Acomodações de Charme",
+    "title": "Refúgios voltados para o horizonte azul",
+    "description": "Cada espaço foi desenhado para valorizar a luz natural litorânea, materiais orgânicos, texturas de madeira e a vista privilegiada das pedras e do mar de Iriri.",
+    "pricePrefix": "Diárias a partir de",
+    "perNight": "/ noite",
+    "btnReserve": "Reservar",
+    "suite1": {
+      "name": "Suíte Costa Azul",
+      "tag": "Frente Mar",
+      "desc": "Ampla sacada privativa voltada para o oceano, cama King Size, ducha com vista para o horizonte e enxoval 400 fios.",
+      "spec1": "48 m²",
+      "spec2": "Até 2 hóspedes",
+      "spec3": "Ar Split & Cafeteira",
+      "price": "R$ 720",
+      "imgAlt": "Suíte Costa Azul"
+    },
+    "suite2": {
+      "name": "Suíte Mirante da Pedra",
+      "tag": "Vista Panorâmica",
+      "desc": "Suspensa sobre o costão rochoso com janelas do chão ao teto. O espetáculo do pôr do sol direto da banheira de imersão.",
+      "spec1": "56 m²",
+      "spec2": "Até 3 hóspedes",
+      "spec3": "Banheira Imersão",
+      "price": "R$ 940",
+      "imgAlt": "Suíte Mirante da Pedra"
+    },
+    "suite3": {
+      "name": "Bangalô das Enseadas",
+      "tag": "Máxima Exclusividade",
+      "desc": "Estrutura independente com deque privativo em madeira, solário com espreguiçadeiras e acesso reservado à área das pedras.",
+      "spec1": "68 m²",
+      "spec2": "Até 4 hóspedes",
+      "spec3": "Deque & Lounge",
+      "price": "R$ 1.180",
+      "imgAlt": "Bangalô das Enseadas"
+    }
+  },
+  "gastronomy": {
+    "eyebrow": "Gastronomia & Tradição",
+    "title": "Sabores que nascem do mar e da terra capixaba",
+    "quote": "“Moqueca é capixaba, o resto é peixada.” Aqui no Recanto da Pedra, essa afirmação ganha vida em panelas de barro artesanais, azeite de urucum puro, coentro fresco e peixes nobres pescados diariamente em Iriri e Anchieta.",
+    "dish1Title": "Moqueca Capixaba de Badejo & Camarão VG",
+    "dish1Desc": "Cozida lentamente na panela de barro artesanal, servida com pirão aveludado e arroz de coco fresco.",
+    "dish2Title": "Torta Capixaba Tradicional & Mariscos",
+    "dish2Desc": "Receita histórica do litoral do Espírito Santo, unindo siri desfiado, bacalhau, camarões e palmito fresco.",
+    "dish3Title": "Coquetelaria Autoral Costa Azul",
+    "dish3Desc": "Drinks refrescantes criados com frutas litorâneas, cachaças artesanais capixabas e especiarias.",
+    "btnReserveTable": "Reservar Mesa no Restaurante",
+    "captionMoqueca": "Autêntica Moqueca Capixaba",
+    "captionHall": "Salão com vista para as pedras",
+    "captionDrinks": "Coquetéis ao entardecer",
+    "imgAltMoqueca": "Moqueca Capixaba tradicional na panela de barro",
+    "imgAltHall": "Restaurante com vista panorâmica para o mar",
+    "imgAltDrinks": "Drinks refrescantes à beira-mar"
+  },
+  "experiences": {
+    "eyebrow": "Momentos Únicos",
+    "title": "O Encanto da Costa Azul",
+    "description": "Iriri é reconhecida carinhosamente como o balneário mais charmoso do Espírito Santo. De enseadas mornas a costões rochosos esculpidos pelo vento, viva cada detalhe.",
+    "exp1Title": "Piscinas Naturais",
+    "exp1Desc": "Mergulho tranquilo entre os recifes e costões rochosos logo em frente ao Recanto.",
+    "exp1ImgAlt": "Piscinas naturais nas pedras de Iriri",
+    "exp2Title": "Café da Manhã na Brisa",
+    "exp2Desc": "Pães artesanais, bolos caseiros, queijos do estado e frutas frescas servidos de frente para o mar.",
+    "exp2ImgAlt": "Café da manhã artesanal ao ar livre",
+    "exp3Title": "Pôr do Sol Dourado",
+    "exp3Desc": "O espetáculo diário das cores do entardecer refletindo nas rochas graníticas de Iriri.",
+    "exp3ImgAlt": "Pôr do Sol no costão rochoso",
+    "exp4Title": "Passeios de Barco",
+    "exp4Desc": "Navegue pelas enseadas de Areia Preta, Costa Azul, Namorados e Santa Helena.",
+    "exp4ImgAlt": "Passeios náuticos pelas enseadas de Anchieta"
+  },
+  "reviews": {
+    "eyebrow": "Memórias de Quem Viveu",
+    "title": "Palavras de Nossos Hóspedes",
+    "rev1Quote": "“Acordar com o barulho do mar batendo nas pedras e tomar um café impecável olhando a Costa Azul não tem preço. A moqueca servida no restaurante é uma das melhores que comi em todo o Espírito Santo.”",
+    "rev1Author": "Mariana Silveira",
+    "rev1City": "Belo Horizonte, MG",
+    "rev2Quote": "“O cuidado com a estética e o silêncio são impressionantes. Uma hospedagem que respeita a natureza e oferece um conforto no nível das melhores pousadas de charme do Brasil.”",
+    "rev2Author": "Rodrigo Furtado",
+    "rev2City": "Vitória, ES",
+    "rev3Quote": "“Lugar perfeito para casais que buscam descansar de verdade. Tomar um vinho no deque sobre as rochas ao entardecer é uma experiência mágica.”",
+    "rev3Author": "Carla & Paulo Mendes",
+    "rev3City": "Rio de Janeiro, RJ"
+  },
+  "info": {
+    "eyebrow": "Informações Oficiais",
+    "title": "Localização, Horários & Atendimento",
+    "description": "Planeje sua visita ao nosso restaurante e pousada na Costa Azul de Anchieta. Estamos de portas abertas para acolher você de frente para o mar.",
+    "hoursTitle": "Horário de Funcionamento",
+    "statusOpen": "Aberto agora",
+    "statusClosed": "Fechado agora",
+    "todayPrefix": "Hoje:",
+    "nextOpening": "Próxima abertura: 11:00",
+    "todayTag": "Hoje",
+    "days": {
+      "tuesday": "Terça-feira",
+      "wednesday": "Quarta-feira",
+      "thursday": "Quinta-feira",
+      "friday": "Sexta-feira",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "monday": "Segunda-feira"
+    },
+    "contactsTitle": "Canais de Atendimento",
+    "phoneLabel": "☎ Telefone Comercial",
+    "phoneBtn": "LIGAR",
+    "phoneAria": "Ligar para o telefone fixo",
+    "phoneTitle": "Ligar para o telefone comercial",
+    "wppLabel": "💬 WhatsApp Oficial",
+    "wppBtn": "WHATSAPP",
+    "wppAria": "Enviar mensagem no WhatsApp",
+    "wppTitle": "Conversar no WhatsApp"
+  },
+  "location": {
+    "eyebrow": "📍 Localização Oficial",
+    "title": "Onde Encontrar o Recanto",
+    "addressTitle": "Clique para abrir no Google Maps",
+    "addressStreet": "Rua Adir, R. Ady Fernandes Mignone",
+    "addressCity": "Anchieta – ES, 29230-000",
+    "addressHint": "Toque para abrir a rota no Google Maps",
+    "route1Badge": "Vitória / ES",
+    "route1Dist": "km via Rodovia do Sol (ES-060)",
+    "route1Desc": "Aproximadamente 1h20 em trajeto panorâmico litorâneo por Guarapari.",
+    "route2Badge": "Belo Horizonte / MG",
+    "route2Dist": "km via BR-262 e BR-101",
+    "route2Desc": "Acesso direto ao balneário de Iriri com asfalto até o Recanto.",
+    "route3Badge": "Rio de Janeiro / RJ",
+    "route3Dist": "km via BR-101 Norte",
+    "route3Desc": "Passando por Campos dos Goytacazes e Marataízes.",
+    "btnRoute": "Traçar Rota no Google Maps",
+    "iframeTitle": "Mapa de Localização - Recanto da Pedra em Anchieta ES"
+  },
+  "banner": {
+    "tag": "Sua estadia memorável",
+    "title": "Pronto para viver o ritmo do mar e da pedra?",
+    "desc": "Garanta as melhores datas diretamente conosco com atendimento personalizado, tarifas exclusivas e as melhores suítes do litoral capixaba.",
+    "btnWpp": "Reservar pelo WhatsApp",
+    "btnCall": "Ligar: (28) 3534-1599"
+  },
+  "footer": {
+    "bio": "Um recanto autoral em Iriri, Espírito Santo, onde a imensidão do mar se une à solidez das rochas e à tradição dos sabores capixabas.",
+    "navTitle": "Navegação",
+    "hoursTitle": "Horários Oficiais",
+    "hoursTueSat": "Terça a Sábado: 11:00 – 23:00",
+    "hoursSun": "Domingo: 11:00 – 16:00",
+    "hoursMon": "Segunda-feira: 11:00 – 23:00",
+    "statusOpen": "● Aberto agora",
+    "statusClosed": "○ Fechado agora",
+    "contactTitle": "Contato & Endereço",
+    "copyright": "© 2026 Recanto da Pedra — Todos os direitos reservados. Projeto autoral.",
+    "addressLine": "Rua Adir, R. Ady Fernandes Mignone • Anchieta – ES"
+  },
+  "floatingWpp": {
+    "ariaLabel": "Fale conosco no WhatsApp"
+  },
+  "modal": {
+    "closeAria": "Fechar janela",
+    "title": "Sua Estadia no Recanto",
+    "subtitle": "Preencha os dados abaixo para receber os valores e disponibilidade diretamente pelo WhatsApp.",
+    "nameLabel": "Seu Nome Completo",
+    "namePlaceholder": "Ex: Ana Clara Martins",
+    "checkinLabel": "Check-in",
+    "checkoutLabel": "Check-out",
+    "guestsLabel": "Hóspedes",
+    "suiteLabel": "Acomodação",
+    "submitBtn": "Consultar via WhatsApp",
+    "guestsOptions": {
+      "couple": "Casal (2 pessoas)",
+      "single": "1 pessoa",
+      "triple": "3 pessoas",
+      "family": "Família (4 ou mais)"
+    },
+    "suiteOptions": {
+      "any": "Qualquer Suíte",
+      "costaAzul": "Suíte Costa Azul",
+      "mirante": "Suíte Mirante da Pedra",
+      "bangalo": "Bangalô das Enseadas"
+    }
+  },
+  "whatsappMessages": {
+    "defaultInfo": "Olá, gostaria de informações sobre o Recanto da Pedra",
+    "restaurantTable": "Olá, gostaria de reservar uma mesa no Restaurante do Recanto da Pedra",
+    "bookingHeader": "🌊 *CONSULTA DE RESERVA — RECANTO DA PEDRA (IRIRI/ES)*",
+    "guestLine": "• *Hóspede:* {name}",
+    "checkinLine": "• *Check-in:* {date} ({weekday})",
+    "checkoutLine": "• *Check-out:* {date} ({weekday})",
+    "durationLine": "• *Duração:* {count} {word}",
+    "guestsLine": "• *Hóspedes:* {guests}",
+    "suiteLine": "• *Acomodação:* {suite}",
+    "sourceLine": "• *Origem:* Tarifa Oficial do Site (com Café da Manhã Capixaba Incluso)",
+    "footerPrompt": "Gostaria de verificar a disponibilidade e confirmar os valores para o período.",
+    "dailySingle": "diária",
+    "dailyPlural": "diárias"
+  }
+}
