@@ -2120,6 +2120,19 @@ h1, h2, h3, h4, .serif-title {
   transform: translateY(-2px);
 }
 
+.btn-insta-action {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.28);
+}
+
+.btn-insta-action:hover {
+  background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(220, 39, 67, 0.45);
+}
+
 /* Bloco de Endereço Clicável */
 .address-card-content {
   display: flex;
@@ -2376,31 +2389,49 @@ h1, h2, h3, h4, .serif-title {
 }
 
 /* ==========================================================================
-   MODAL DE RESERVA / WHATSAPP FLUTUANTE
+   BOTÕES FLUTUANTES (WHATSAPP & INSTAGRAM)
    ========================================================================== */
 
-.floating-whatsapp {
+.floating-actions {
   position: fixed;
   bottom: 28px;
   right: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 998;
+  align-items: center;
+}
+
+.floating-btn {
+  position: relative;
   width: 58px;
   height: 58px;
-  background-color: #25D366;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
   font-size: 1.8rem;
-  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
-  z-index: 998;
+  text-decoration: none;
   cursor: pointer;
-  animation: whatsappPulse var(--anim-whatsapp-pulse, 2.6s) infinite var(--anim-ease);
   will-change: transform, box-shadow;
   transition: transform 0.35s var(--anim-ease), box-shadow 0.35s var(--anim-ease);
 }
 
-/* Pulso verde contínuo (box-shadow expande e dissipa suavemente) */
+.floating-btn:focus-visible {
+  outline: 3px solid var(--gold-glow);
+  outline-offset: 3px;
+}
+
+/* WhatsApp Flutuante */
+.floating-whatsapp {
+  background-color: #25D366;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  animation: whatsappPulse var(--anim-whatsapp-pulse, 2.6s) infinite var(--anim-ease);
+}
+
+/* Pulso verde contínuo */
 @keyframes whatsappPulse {
   0% {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.65), 0 8px 24px rgba(37, 211, 102, 0.4);
@@ -2417,6 +2448,102 @@ h1, h2, h3, h4, .serif-title {
   animation-play-state: paused;
   transform: scale(1.12) rotate(-6deg);
   box-shadow: 0 14px 34px rgba(37, 211, 102, 0.65);
+  color: #ffffff;
+}
+
+/* Instagram Flutuante */
+.floating-instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  box-shadow: 0 8px 24px rgba(214, 36, 159, 0.4);
+  animation: instagramPulse var(--anim-whatsapp-pulse, 2.8s) infinite var(--anim-ease);
+  animation-delay: 1.4s;
+}
+
+/* Pulso vibrante Instagram intercalado */
+@keyframes instagramPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(214, 36, 159, 0.65), 0 8px 24px rgba(214, 36, 159, 0.4);
+  }
+  65% {
+    box-shadow: 0 0 0 16px rgba(214, 36, 159, 0), 0 8px 24px rgba(214, 36, 159, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(214, 36, 159, 0), 0 8px 24px rgba(214, 36, 159, 0.4);
+  }
+}
+
+.floating-instagram:hover {
+  animation-play-state: paused;
+  transform: scale(1.12) rotate(6deg);
+  box-shadow: 0 14px 34px rgba(214, 36, 159, 0.65);
+  color: #ffffff;
+}
+
+/* Tooltip elegante em Desktop */
+@media (hover: hover) and (pointer: fine) {
+  .floating-btn::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: calc(100% + 14px);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    background: rgba(7, 19, 33, 0.94);
+    color: #ffffff;
+    font-size: 0.76rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s var(--anim-ease), transform 0.25s var(--anim-ease), visibility 0.25s;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(232, 198, 140, 0.28);
+  }
+
+  .floating-btn::after {
+    content: '';
+    position: absolute;
+    right: calc(100% + 6px);
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(7, 19, 33, 0.94);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s var(--anim-ease), visibility 0.25s;
+  }
+
+  .floating-btn:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .floating-btn:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Responsividade Mobile para Botões Flutuantes */
+@media (max-width: 600px) {
+  .floating-actions {
+    bottom: 20px;
+    right: 16px;
+    gap: 10px;
+  }
+
+  .floating-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.55rem;
+  }
 }
 
 /* Modal de Reserva */
@@ -2769,7 +2896,8 @@ div[id="localizacao"],
     display: none !important;
   }
 
-  :root:not([data-force-motion="true"]) .floating-whatsapp {
+  :root:not([data-force-motion="true"]) .floating-whatsapp,
+  :root:not([data-force-motion="true"]) .floating-instagram {
     animation: none !important;
     transform: none !important;
     transition: none !important;
@@ -3125,7 +3253,7 @@ div[id="localizacao"],
 .back-to-top {
   position: fixed;
   bottom: 28px;
-  right: 88px;
+  right: 98px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -3143,6 +3271,15 @@ div[id="localizacao"],
   transition: all var(--transition-smooth);
   box-shadow: 0 8px 24px rgba(7, 19, 33, 0.3);
   z-index: 998;
+}
+
+@media (max-width: 600px) {
+  .back-to-top {
+    bottom: 20px;
+    right: 76px;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .back-to-top.is-visible {
@@ -3186,6 +3323,719 @@ div[id="localizacao"],
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   COMPONENTE PROFISSIONAL DE CLIMA & MAR (IRIRI, ANCHIETA - ES)
+   - Linha recolhida: fina e discreta (~44px max no desktop)
+   - Painel expandido: tabela semântica profissional estilo Apple Weather / Windy
+   - Abas segmentadas: "Sua estadia" e "7 dias"
+   - Barra de temperatura estilo Apple Weather (mín–barra–máx)
+   - Destaque da estadia: barra dourada de 2px e fundo suave
+   - Mobile: 2 linhas compactas por dia, sem rolagem horizontal
+   ========================================================================== */
+
+.weather-marine-widget {
+  margin-top: 0.65rem;
+  width: 100%;
+}
+
+.weather-minimal-bar {
+  background: transparent;
+  border-top: 1px dashed rgba(222, 213, 197, 0.4);
+  padding-top: 0.65rem;
+  width: 100%;
+}
+
+[data-theme="dark"] .weather-minimal-bar {
+  border-top-color: rgba(34, 52, 79, 0.6);
+}
+
+/* 1. LINHA RECOLHIDA (Botão de Gatilho) */
+.weather-toggle-btn {
+  width: 100%;
+  min-height: 38px;
+  max-height: 44px;
+  background: rgba(14, 22, 38, 0.4);
+  border: 1px solid rgba(34, 52, 79, 0.55);
+  border-radius: 8px;
+  padding: 0.35rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: #9ab0cc;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.3;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  text-align: left;
+}
+
+.weather-toggle-btn:hover {
+  background: rgba(18, 32, 54, 0.7);
+  border-color: rgba(217, 169, 91, 0.35);
+}
+
+.weather-toggle-btn:focus-visible {
+  outline: 2px solid #d9a95b;
+  outline-offset: 2px;
+}
+
+.weather-summary-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.weather-summary-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.weather-dot-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3ecf9a;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.weather-mini-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.weather-mini-icon-wrap svg {
+  width: 15px;
+  height: 15px;
+  stroke: #9ab0cc;
+  vertical-align: middle;
+}
+
+.weather-sea-emoji {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.weather-summary-sep {
+  color: #3b506d;
+  font-size: 11px;
+  user-select: none;
+}
+
+.weather-stay-item {
+  color: #d9a95b;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.weather-chevron {
+  color: #9ab0cc;
+  font-size: 11px;
+  margin-left: 10px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.weather-minimal-bar.is-expanded .weather-chevron {
+  transform: rotate(180deg);
+  color: #d9a95b;
+}
+
+/* 2. PAINEL EXPANDIDO (Gaveta com Transição de 200ms) */
+.weather-drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease;
+}
+
+.weather-minimal-bar.is-expanded .weather-drawer {
+  max-height: 520px;
+  opacity: 1;
+}
+
+.weather-drawer-inner {
+  padding: 0.75rem 0.2rem 0.25rem;
+}
+
+/* Barra Superior: Seletor Segmentado de Abas */
+.weather-drawer-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+
+.weather-tab-group {
+  display: inline-flex;
+  background: rgba(14, 22, 38, 0.65);
+  border: 1px solid rgba(34, 52, 79, 0.7);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.weather-tab-btn {
+  background: transparent;
+  border: none;
+  color: #9ab0cc;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+  line-height: 1.3;
+}
+
+.weather-tab-btn:hover:not(:disabled) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.weather-tab-btn.is-active {
+  background: rgba(34, 52, 79, 0.95);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.weather-tab-btn:focus-visible {
+  outline: 2px solid #d9a95b;
+  outline-offset: 1px;
+}
+
+.weather-tab-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Bloco Discreto de Resumo das Condições do Momento */
+.weather-summary-snapshot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(14, 22, 38, 0.45);
+  border: 1px solid rgba(34, 52, 79, 0.4);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 11.5px;
+  color: #cbd5e1;
+  overflow-x: auto;
+}
+
+.snap-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.snap-lbl {
+  color: #9ab0cc;
+  font-size: 11px;
+}
+
+.snap-val {
+  color: #e8edf5;
+  font-weight: 600;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.snap-marine {
+  color: #3ecf9a;
+}
+
+.snap-sep {
+  color: rgba(154, 176, 204, 0.25);
+  user-select: none;
+  font-size: 10px;
+}
+
+/* Container da Tabela com Rolagem Vertical Suave */
+.weather-table-container {
+  width: 100%;
+  max-height: 330px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(154, 176, 204, 0.25) transparent;
+}
+
+.weather-table-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.weather-table-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.weather-table-container::-webkit-scrollbar-thumb {
+  background: rgba(154, 176, 204, 0.25);
+  border-radius: 4px;
+}
+
+/* Tabela Semântica de Previsão */
+.weather-pro-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  text-align: left;
+  table-layout: auto;
+}
+
+.weather-pro-table thead th {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ab0cc;
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(14, 22, 38, 0.35);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.weather-pro-table thead .th-day {
+  padding-left: 10px;
+  width: 14%;
+}
+
+.weather-pro-table thead .th-icon {
+  width: 4%;
+  text-align: center;
+}
+
+.weather-pro-table thead .th-cond {
+  width: 22%;
+}
+
+.weather-pro-table thead .th-rain {
+  width: 14%;
+}
+
+.weather-pro-table thead .th-temp {
+  width: 26%;
+}
+
+.weather-pro-table thead .th-wind {
+  width: 10%;
+}
+
+.weather-pro-table thead .th-waves {
+  width: 10%;
+  padding-right: 10px;
+  text-align: right;
+}
+
+/* Linhas e Células da Tabela */
+.weather-table-row {
+  height: 46px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background 150ms ease;
+}
+
+.weather-table-row:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.weather-table-row td {
+  padding: 6px 8px;
+  vertical-align: middle;
+  font-size: 13px;
+  color: #e8edf5;
+}
+
+/* Destaque Sutil da Estadia na Aba "7 dias" */
+.weather-table-row.is-stay-row {
+  background: rgba(217, 169, 91, 0.08);
+}
+
+.weather-table-row.is-stay-row:hover {
+  background: rgba(217, 169, 91, 0.12);
+}
+
+.weather-table-row.is-stay-row .cell-day {
+  box-shadow: inset 2px 0 0 #d9a95b;
+}
+
+.stay-subtle-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #d9a95b;
+  background: rgba(217, 169, 91, 0.16);
+  border-radius: 3px;
+  padding: 1px 5px;
+  line-height: 1.2;
+}
+
+/* Coluna 1: Dia */
+.cell-day {
+  padding-left: 10px;
+}
+
+.day-wrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.day-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e8edf5;
+}
+
+.day-name.is-today-text {
+  color: #ffffff;
+}
+
+.day-date {
+  font-size: 11px;
+  color: #9ab0cc;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Coluna 2: Ícone Vetorial SVG */
+.cell-icon {
+  text-align: center;
+  line-height: 1;
+}
+
+.weather-svg-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  color: #9ab0cc;
+  flex-shrink: 0;
+}
+
+/* Coluna 3: Condição */
+.cell-cond .cond-text {
+  font-size: 13px;
+  color: #cbd5e1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* Coluna 4: Chuva */
+.cell-rain .rain-data {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #38bdf8;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rain-glyph {
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+/* Coluna 5: Temperatura com Barra Estilo Apple Weather */
+.cell-temp .temp-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.temp-num {
+  font-size: 13.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  min-width: 24px;
+}
+
+.temp-min-val {
+  color: #9ab0cc;
+  text-align: right;
+}
+
+.temp-max-val {
+  color: #e8edf5;
+  text-align: left;
+}
+
+.temp-bar-bg {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  min-width: 48px;
+}
+
+.temp-bar-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3ecf9a 0%, #d9a95b 100%);
+}
+
+/* Coluna 6: Vento com Seta Direcional */
+.cell-wind .wind-data {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: #cbd5e1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.wind-arrow-svg {
+  color: #9ab0cc;
+  transform-origin: center;
+  flex-shrink: 0;
+}
+
+/* Coluna 7: Ondas */
+.cell-waves {
+  padding-right: 10px;
+  text-align: right;
+}
+
+.cell-waves .waves-data {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #3ecf9a;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.wave-period-sec {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(62, 207, 154, 0.8);
+}
+
+.weather-table-empty {
+  text-align: center;
+  padding: 24px;
+  color: #9ab0cc;
+  font-size: 13px;
+}
+
+/* Rodapé Discreto */
+.weather-drawer-footer {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6b829e;
+  text-align: right;
+  padding-right: 4px;
+  user-select: none;
+}
+
+/* 3. RESPONSIVIDADE MOBILE (Telas estreitas / 375px) */
+@media (max-width: 640px) {
+  .weather-toggle-btn {
+    min-height: 44px;
+    height: auto;
+    max-height: none;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .weather-summary-line {
+    flex-wrap: wrap;
+    row-gap: 3px;
+    column-gap: 6px;
+    white-space: normal;
+  }
+
+  .weather-summary-snapshot {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 8px;
+    padding: 8px 10px;
+  }
+
+  .weather-summary-snapshot .snap-sep {
+    display: none;
+  }
+
+  .weather-table-container {
+    overflow-x: hidden;
+    max-height: 380px;
+  }
+
+  .weather-pro-table {
+    display: block;
+    width: 100%;
+  }
+
+  .weather-pro-table thead {
+    display: none;
+  }
+
+  .weather-pro-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  /* Cada dia vira 2 linhas compactas sem rolagem horizontal */
+  .weather-table-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: auto;
+    min-height: 52px;
+    padding: 7px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    gap: 0;
+  }
+
+  .weather-table-row.is-stay-row {
+    box-shadow: inset 2px 0 0 #d9a95b;
+  }
+
+  .weather-table-row.is-stay-row .cell-day {
+    box-shadow: none;
+  }
+
+  /* Linha 1 no Mobile: Dia + Ícone + Condição + Máx/Mín */
+  .cell-day {
+    order: 1;
+    padding: 0 6px 0 0;
+    flex: 0 0 auto;
+  }
+
+  .cell-icon {
+    order: 2;
+    padding: 0 6px 0 0;
+    flex: 0 0 auto;
+  }
+
+  .cell-icon .weather-svg-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .cell-cond {
+    order: 3;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 6px 0 0;
+  }
+
+  .cell-cond .cond-text {
+    font-size: 12.5px;
+  }
+
+  .cell-temp {
+    order: 4;
+    flex: 0 0 auto;
+    margin-left: auto;
+    padding: 0;
+  }
+
+  .cell-temp .temp-bar-container {
+    gap: 4px;
+    max-width: 110px;
+  }
+
+  .temp-num {
+    font-size: 12.5px;
+    min-width: 20px;
+  }
+
+  .temp-bar-bg {
+    min-width: 26px;
+    width: 32px;
+    flex: 0 0 32px;
+  }
+
+  /* Elemento de quebra para Linha 2 */
+  .weather-table-row::before {
+    content: "";
+    order: 5;
+    flex-basis: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Linha 2 no Mobile: Chuva, Vento e Ondas em texto pequeno */
+  .cell-rain {
+    order: 6;
+    padding: 4px 12px 0 0;
+    flex: 0 0 auto;
+  }
+
+  .cell-rain .rain-data {
+    font-size: 11px;
+  }
+
+  .cell-wind {
+    order: 7;
+    padding: 4px 12px 0 0;
+    flex: 0 0 auto;
+  }
+
+  .cell-wind .wind-data {
+    font-size: 11px;
+  }
+
+  .cell-waves {
+    order: 8;
+    padding: 4px 0 0 0;
+    flex: 0 0 auto;
+    text-align: left;
+  }
+
+  .cell-waves .waves-data {
+    font-size: 11px;
+  }
+}
+
+/* Acessibilidade: Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .weather-drawer {
+    transition: none !important;
+  }
+  .weather-chevron {
+    transition: none !important;
+  }
+  .weather-tab-btn {
+    transition: none !important;
   }
 }
 

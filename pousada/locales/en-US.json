@@ -241,7 +241,11 @@
     "wppLabel": "💬 Official WhatsApp",
     "wppBtn": "WHATSAPP",
     "wppAria": "Send message on WhatsApp",
-    "wppTitle": "Chat on WhatsApp"
+    "wppTitle": "Chat on WhatsApp",
+    "instaLabel": "📸 Official Instagram",
+    "instaBtn": "FOLLOW",
+    "instaAria": "Follow profile on Instagram",
+    "instaTitle": "View Instagram profile @recantodapedra"
   },
   "location": {
     "eyebrow": "📍 Official Location",
@@ -283,7 +287,12 @@
     "addressLine": "Rua Adir, R. Ady Fernandes Mignone • Anchieta – ES"
   },
   "floatingWpp": {
-    "ariaLabel": "Chat with us on WhatsApp"
+    "ariaLabel": "Chat with us on WhatsApp",
+    "title": "Official WhatsApp"
+  },
+  "floatingInsta": {
+    "ariaLabel": "Follow Recanto da Pedra on Instagram @recantodapedra",
+    "title": "Instagram @recantodapedra"
   },
   "modal": {
     "closeAria": "Close window",

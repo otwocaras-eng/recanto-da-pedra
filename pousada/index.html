@@ -331,6 +331,9 @@
             <span data-i18n="booking.featureOceanfront">Frente para o mar de Iriri</span>
           </span>
         </div>
+
+        <!-- ==================== PREVISÃO DO TEMPO & MAR (OPEN-METEO) ==================== -->
+        <div id="weatherMarineConsole" class="weather-marine-widget"></div>
       </div>
     </div>
   </section>
@@ -825,6 +828,21 @@
                   <i class="fa-brands fa-whatsapp" aria-hidden="true" style="font-size: var(--icon-xs); margin-left: 6px;"></i>
                 </a>
               </div>
+
+              <!-- Instagram Oficial -->
+              <div class="contact-action-item">
+                <div class="contact-info-col">
+                  <span class="contact-type-label">
+                    <i class="fa-brands fa-instagram contact-fa-icon" style="color: #E1306C;" aria-hidden="true"></i>
+                    <span data-i18n="info.instaLabel">Instagram Oficial</span>
+                  </span>
+                  <a href="https://www.instagram.com/recantodapedra/" target="_blank" rel="noopener noreferrer" class="contact-number-val" style="font-family: var(--font-sans); font-size: 1.15rem;">@recantodapedra</a>
+                </div>
+                <a href="https://www.instagram.com/recantodapedra/" target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-insta-action" aria-label="Seguir no Instagram" data-i18n-attr="aria-label:info.instaAria,title:info.instaTitle" title="Ver perfil no Instagram @recantodapedra">
+                  <span data-i18n="info.instaBtn">SEGUIR</span>
+                  <i class="fa-brands fa-instagram" aria-hidden="true" style="font-size: var(--icon-xs); margin-left: 6px;"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -945,7 +963,7 @@
         
         <!-- Redes Sociais no Rodapé -->
         <div class="footer-socials" role="navigation" aria-label="Redes Sociais">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram do Recanto da Pedra">
+          <a href="https://www.instagram.com/recantodapedra/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram do Recanto da Pedra (@recantodapedra)" title="Instagram @recantodapedra">
             <i class="fa-brands fa-instagram" aria-hidden="true"></i>
           </a>
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook do Recanto da Pedra">
@@ -1003,6 +1021,12 @@
               (28) 99975-0058
             </a>
           </div>
+          <div class="footer-contact-item">
+            <i class="fa-brands fa-instagram" style="color: #E1306C;" aria-hidden="true"></i>
+            <a href="https://www.instagram.com/recantodapedra/" target="_blank" rel="noopener noreferrer" style="color: #E1306C; font-weight: 600;" title="Ver perfil no Instagram @recantodapedra" data-i18n-attr="title:info.instaTitle" aria-label="Instagram Oficial @recantodapedra">
+              @recantodapedra
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1013,10 +1037,18 @@
     </div>
   </footer>
 
-  <!-- ==================== WHATSAPP FLUTUANTE ==================== -->
-  <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="floating-whatsapp js-wpp-info" aria-label="Fale conosco no WhatsApp" data-i18n-attr="aria-label:floatingWpp.ariaLabel">
-    <i class="fa-brands fa-whatsapp" style="font-size: 32px;" aria-hidden="true"></i>
-  </a>
+  <!-- ==================== BOTÕES FLUTUANTES (WHATSAPP & INSTAGRAM) ==================== -->
+  <aside class="floating-actions" aria-label="Canais de Contato e Redes Sociais">
+    <!-- Instagram Flutuante Oficial -->
+    <a href="https://www.instagram.com/recantodapedra/" target="_blank" rel="noopener noreferrer" class="floating-btn floating-instagram" aria-label="Siga o Recanto da Pedra no Instagram @recantodapedra" data-tooltip="Instagram @recantodapedra" data-i18n-attr="aria-label:floatingInsta.ariaLabel,title:floatingInsta.title" title="Instagram @recantodapedra">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+    </a>
+
+    <!-- WhatsApp Flutuante Oficial -->
+    <a href="https://wa.me/5528999750058?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Recanto%20da%20Pedra" target="_blank" rel="noopener noreferrer" class="floating-btn floating-whatsapp js-wpp-info" aria-label="Fale conosco no WhatsApp" data-tooltip="WhatsApp Oficial" data-i18n-attr="aria-label:floatingWpp.ariaLabel,title:floatingWpp.title" title="WhatsApp Oficial">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+    </a>
+  </aside>
 
   <!-- ==================== BOTÃO VOLTAR AO TOPO ==================== -->
   <button class="back-to-top" id="backToTopBtn" type="button" aria-label="Voltar ao topo da página" title="Voltar ao topo">
@@ -1079,8 +1111,9 @@
     </div>
   </div>
 
-  <!-- Scripts: i18n primeiro, seguido pelas interações do site -->
+  <!-- Scripts: i18n primeiro, seguido pelo clima e interações do site -->
   <script src="js/i18n.js?v=3.2"></script>
+  <script src="js/weather.js?v=3.2"></script>
   <script src="js/app.js?v=3.2"></script>
 </body>
 </html>

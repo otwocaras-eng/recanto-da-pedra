@@ -431,6 +431,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (connectorNightsPill) {
       connectorNightsPill.textContent = `${diffDays} ${nightWordLower}`;
     }
+
+    // Sincronizar destaque da estadia com o componente meteorológico e marítimo
+    if (typeof window.climaDestacarEstadia === 'function') {
+      window.climaDestacarEstadia(barCheckin.value, barCheckout.value);
+    }
   };
 
   // Atualizar subtextos dos seletores de hóspedes e acomodações no idioma ativo
